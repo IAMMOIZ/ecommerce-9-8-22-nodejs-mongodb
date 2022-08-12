@@ -5,7 +5,7 @@ const { AddressEnum } = require("../enum/enum")
 
 const getUserListPagination = (req , res )=>{
     try{
-
+        
     }catch(err){
         console.log("error from catch block" , error)
         return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
@@ -154,4 +154,5 @@ delete user ,
 delete address 
 make address permanent as a shipping address
 forget password
+
 */

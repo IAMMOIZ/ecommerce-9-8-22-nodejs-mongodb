@@ -1,5 +1,7 @@
 const { Role  , SubscriptionType, Gender} = require("../enum/enum");
 const   mongoose = require("mongoose");
+
+
 const userSchema = new mongoose.Schema({
     firstName: { type: String , required :[true ,  "firstname is required"]  },
     lastName: { type: String  , required : true},

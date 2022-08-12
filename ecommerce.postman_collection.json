@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "b5421ba8-64ad-48a2-bbcb-341d1a963397",
+		"name": "ecommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\":\"mdddddodddd\",\r\n    \"lastName\":\"aaddadddddd\",\r\n    \"userName\":\"madddddddda\",\r\n    \"email\":\"moiz8dddddddd0@gmDail.com\",\r\n    \"password\":\"abc\",\r\n    \"gender\":\"MALE\",\r\n    \"userRole\" : \"USER\",\r\n    \"subscriptionType\":\"NORMAL\",\r\n    \"profileImage\" : \"asdfadsfdsaf\",\r\n    \"activeStatus\" : \"abc\",\r\n    \"dateOfBirth\" : \"12-10-1996\",\r\n    \"mobile\" : [{ \"countryCode\" : 91, \"number\" : 9898989898 , \"isPrimary\" :  true }],\r\n        \"address\": {\r\n        \"permanentAddress\": {\r\n            \"houseNo\" : 376561,\r\n            \"street\" : 234534,\r\n            \"addressLine1\" : \"bet34gsdggumpura\",\r\n            \"addressLine2\" : \"fakeerpusdfgfsra\",\r\n            \"city\" : \"ujjasfdgin\",\r\n            \"state\" : \"madhyapsdfgsradesh\",\r\n            \"pincode\" : 4560051,\r\n            \"country\" : \"amit\",\r\n            \"addressType\" : \"PERMANENT\"\r\n        },\r\n        \"currentAddress\": {\r\n            \"houseNo\" : 376561,\r\n            \"street\" : 234534,\r\n            \"addressLine1\" : \"bet34gsdggumpura\",\r\n            \"addressLine2\" : \"fakeerpusdfgfsra\",\r\n            \"city\" : \"ujjasfdgin\",\r\n            \"state\" : \"madhyapsdfgsradesh\",\r\n            \"pincode\" : 4560051,\r\n            \"country\" : \"amit\",\r\n            \"addressType\" : \"CURRENT\"\r\n        },\r\n        \"shippingAddress\": {\r\n            \"houseNo\" : 376561,\r\n            \"street\" : 234534,\r\n            \"addressLine1\" : \"bet34gsdggumpura\",\r\n            \"addressLine2\" : \"fakeerpusdfgfsra\",\r\n            \"city\" : \"ujjasfdgin\",\r\n            \"state\" : \"madhyapsdfgsradesh\",\r\n            \"pincode\" : 4560051,\r\n            \"country\" : \"amit\",\r\n            \"addressType\" : \"SHIPPING\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/user/register-user",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"register-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add new address",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "houseNo",
+							"value": "31",
+							"type": "default"
+						},
+						{
+							"key": "street",
+							"value": "32",
+							"type": "default"
+						},
+						{
+							"key": "addressLine1",
+							"value": "address",
+							"type": "default"
+						},
+						{
+							"key": "addressLine2",
+							"value": "address",
+							"type": "default"
+						},
+						{
+							"key": "city",
+							"value": "ujjain",
+							"type": "default"
+						},
+						{
+							"key": "state",
+							"value": "madhyapradesh",
+							"type": "default"
+						},
+						{
+							"key": "country",
+							"value": "india",
+							"type": "default"
+						},
+						{
+							"key": "pincode",
+							"value": "456001",
+							"type": "default"
+						},
+						{
+							"key": "addressType",
+							"value": "PERMANENT",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/address/add-address",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"address",
+						"add-address"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
