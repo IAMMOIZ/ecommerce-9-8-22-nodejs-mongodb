@@ -1,0 +1,279 @@
+//user schema
+import mongoose from "mongoose";
+import validator from "validator";
+import md5 from "md5";
+import passportLocalMongoose from "passport-local-mongoose";
+
+/** @ts-ignore - This allow the the typescript compiler to ignore untyped JS modules/libraries */
+
+//@ts-ignore
+import mongoosedbErrorHandler from "mongoose-mongodb-errors";
+
+export type UserDocument = mongoose.Document & {
+    email: string;
+    password: string;
+    resetPasswordToken: string;
+    resetPasswordExpires: Date;
+    gravatar: string;
+    posts: any;
+    token: any;
+    googleId: string;
+    linkedinId: string;
+    facebookId: string;
+    dropboxId: string;
+    githubId: string;
+    twitterId: string;
+    discordId: string;
+    slackId: string;
+};
+
+const userSchema = new mongoose.Schema(
+    {
+        email: {
+            type: String,
+            unique: true,
+            lowercase: true,
+            required: "Please enter your email address",
+            trim: true,
+            validate: [validator.isEmail, "Invalid Email address"],
+        },
+        googleId: String,
+        linkedinId: String,
+        dropboxId: String,
+        githubId: String,
+        twitterId: String,
+        facebookId: String,
+        discordId: String,
+        slackId: String,
+        token: String,
+    },
+    {
+        toJSON: {virtuals: true},
+        toObject: {virtuals: true},
+    },
+);
+
+userSchema.virtual("gravatar").get(function() {
+    const hash = md5(this.email);
+    return `https://gravatar.com/avatar/${hash}?s=30`;
+});
+
+userSchema.plugin(passportLocalMongoose, {
+    usernameField: "email",
+    errorMessages: {
+        UserExistsError: "A user with the given email is already registered",
+    },
+});
+
+userSchema.plugin(mongoosedbErrorHandler);
+
+export const User = mongoose.model("User", userSchema as mongoose.PassportLocalSchema);
+
+
+//--user schema
+
+// post schema
+import * as mongoose from "mongoose";
+
+export type PostDocument = mongoose.Document & {
+    title: string;
+    description: string;
+};
+
+const postSchema = new mongoose.Schema(
+    {
+        title: {
+            type: String,
+            required: "Please enter the title of your Post",
+        },
+        description: {
+            type: String,
+            required: "Please enter the description of your Post",
+        },
+        author: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: "You must supply an author",
+        },
+    },
+    {
+        toJSON: {virtuals: true},
+        toObject: {virtuals: true},
+    },
+);
+
+export const Post = mongoose.model<PostDocument>("Post", postSchema as mongoose.PassportLocalSchema);
+
+//--post schema
+//user schema
+var mongoose = require('mongoose');
+var userSchema = mongoose.Schema({
+    name : {
+        type: String,
+        unique: true,
+        required: true,
+    },
+    password : {
+        type: String,
+        required: true
+    }
+}, {timestamps: true});
+
+module.exports = mongoose.model('Users', userSchema);
+//--user schema
+//comment
+var mongoose = require('mongoose');
+var commentSchema = mongoose.Schema({
+    postId: {
+        type: Number,
+        default: 1
+    },
+    depth: {
+        type: Number,
+        default: 1
+    },
+    parentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: null
+    },
+    postedDate: {type: Date, default: Date.now},
+    author: {
+        id: mongoose.Schema.Types.ObjectId,
+        name: String,
+    },
+    commentText: {
+        type: String,
+        required: true
+    }
+}, {timestamps: true});
+
+module.exports = mongoose.model('Comments', commentSchema);
+//--comment
+
+//user activity
+var UserActivity = mongoose.model('UserActivity',{
+    Company :{type : String, required: true},
+    Title : {type : String, required: true},
+    recruiterName : {type: String, required: true}
+});
+//--user activity
+//job
+var mongoose = require('mongoose');
+var Applications = mongoose.model('Applications',{
+    Job_id :{type : String, required : true},
+    CompanyName :{type : String, required : true},
+    JobTitle : {type : String, required : true},
+    JobLocation : {type : String, required : true},
+    Applicant_id :{type : String, required : true},
+    Email :{type : String, required: true},
+    RecruiterEmail : {type : String, required: true},
+    Applied :{type : Boolean, default : false, required : true},
+    Saved :{type : Boolean, default : false, required : true},
+    easyApply : {type : Boolean, default : false, required : true},
+    CompanyLogo : {type : String, required : false},
+    HowDidYouHear : {type : String, required: false},
+    resume : {type : String, required: false},
+    cover_letter : {type : String, required: false},
+    First_name : {type : String, required : false},
+    Last_name : { type : String, required : false},
+    Address :{type : String, required : false},
+    Phone :{type : String, required : false},
+    Gender :{type : String, required : false},
+    Race :{type : String, required : false},
+    Veteran :{type : String, required : false},
+    Disability :{type : String, required : false},
+    appliedDate : {type : Date, required: false},
+    postingDate : {type : Date, required: false}
+});
+module.exports = {Applications};
+//--post
+//product rating
+pRatingsReviews: [
+      {
+        review: String,
+        user: { type: ObjectId, ref: "users" },
+        rating: String,
+        createdAt: {
+          type: Date,
+          default: Date.now(),
+        },
+      },
+    ],
+//--product rating
+//order 
+const orderSchema = new mongoose.Schema(
+  {
+    allProduct: [
+      {
+        id: { type: ObjectId, ref: "products" },
+        quantitiy: Number,
+      },
+    ],
+    user: {
+      type: ObjectId,
+      ref: "users",
+      required: true,
+    },
+    amount: {
+      type: Number,
+      required: true,
+    },
+    transactionId: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: Number,
+      required: true,
+    },
+    status: {
+      type: String,
+      default: "Not processed",
+      enum: [
+        "Not processed",
+        "Processing",
+        "Shipped",
+        "Delivered",
+        "Cancelled",
+      ],
+    },
+  },
+  { timestamps: true }
+);
+//---order
+//cart
+const CartSchema = new Schema({
+  owner: { type: Schema.Types.ObjectId, ref: "User" },
+  total: { type: Number, default: 0 },
+  items: [
+    {
+      item: { type: Schema.Types.ObjectId, ref: "Product" },
+      quantity: { type: Number, default: 1 },
+      price: { type: Number, default: 0 },
+    },
+  ],
+});
+//----cart
+//user
+const UserSchema = new Schema({
+  email: { type: String, unique: true, lowercase: true },
+  facebook: String,
+  tokens: Array,
+  password: String,
+  profile: {
+    name: { type: String, default: "" },
+    picture: { type: String, default: "" },
+  },
+  address: String,
+  history: [
+    {
+      paid: { type: Number, default: 0 },
+      item: { type: Schema.Types.ObjectId, ref: "Product" },
+    },
+  ],
+});
+//--user
