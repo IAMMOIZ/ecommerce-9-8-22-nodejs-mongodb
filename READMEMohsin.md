@@ -9,6 +9,8 @@ change payment method
 change mobile number
 activestatus
 update profile apis
+update profile apis
+update profile apis
 find user by its phone number in the array
 
 /payment
