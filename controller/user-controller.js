@@ -3,24 +3,42 @@ const userModel = require("../model/user.model")
 const { addAddress }= require("../helpers/address.helper")
 const { AddressEnum } = require("../enum/enum")
 
-const getUserListPagination = (req , res )=>{
-    try{
 
-    }catch(err){
-        console.log("error from catch block" , error)
+//get all user list with PAGGINATION 
+const  getUserListPagination = async(req , res )=>{
+    try{
+        console.log("paggination");
+        let page = req.query.pageNo - 1;
+        let limit = req.query.limit;
+        let skip = page * limit;
+        let data = await userModel
+          .find()
+          .limit(limit)
+          .skip(skip)
+
+          return res.status(200).json({
+            total: data.length,
+            msg: "successfully got all user",
+            result: data,
+       
+          })}catch(error){
+        console.log("error from catch block of paggination" , error)
         return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
     }
 }
+
 
 const getUserDetailsByUserId = (req , res )=>{
     try{
+            
+          }
 
-    }catch(err){
+    catch(err){
         console.log("error from catch block" , error)
         return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
-    }
+    }}
 
-}
+
 
 const deleteUsers = (req , res )=>{
     try{
