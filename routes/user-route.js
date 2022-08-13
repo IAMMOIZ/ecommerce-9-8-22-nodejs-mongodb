@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { getUserListPagination , updateUserDetailsById, updateManyUsersStatus , registerUser, deleteUsers, getUserDetailsByUserId} = require("../controller/user-controller")
-
+const { IMAGEHelper , uploadImage } = require("../helpers/image.helper")
 
 
 //dummy api for testing
@@ -19,7 +19,7 @@ router.put("/update-user-Ddetails/:id", updateUserDetailsById )
 router.patch("/status-user", updateManyUsersStatus )
 
 //addUser
-router.post("/register-user", registerUser )
+router.post("/register-user", IMAGEHelper.single('myImage') , uploadImage ,registerUser )
 
 //get user list with pagination
 router.delete("/delete-users", deleteUsers )
@@ -28,9 +28,13 @@ router.delete("/delete-users", deleteUsers )
 router.get("/user-detail/:id", getUserDetailsByUserId )
 
 //login
-router.post("/login", getUserDetailsByUserId )
+router.post("/login", signin )
+
+
+//login by phone numer params will be country code and mobile number
+router.post("/signin-mobile", signinByMobileNumber )
 
 //logout
-router.post("/logout", getUserDetailsByUserId )
+router.post("/signout", getUserDetailsByUserId )
 
 module.exports = router
