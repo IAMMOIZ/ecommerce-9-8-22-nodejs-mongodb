@@ -25,7 +25,7 @@ router.post("/register-user", registerUser )
 router.post("/delete-users", deleteUsers )
 
 //getUserDetailsByUserId
-router.get("/user-detail/:Id", getUserDetailsByUserId )
+router.get("/user-detail/:id", getUserDetailsByUserId )
 
 //login
 router.post("/login", getUserDetailsByUserId )

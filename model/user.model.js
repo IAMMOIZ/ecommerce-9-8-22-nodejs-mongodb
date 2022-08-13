@@ -1,5 +1,6 @@
 const { Role, SubscriptionType, Gender } = require("../enum/enum");
 const mongoose = require("mongoose");
+
 const userSchema = new mongoose.Schema(
   {
     firstName: { type: String, required: [true, "firstname is required"] },
@@ -31,16 +32,16 @@ const userSchema = new mongoose.Schema(
     address: {
       permanentAddress: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Address",
+        ref: "addresses",
         required: [true, "Permanent address is required"],
       },
       currentAddress: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Address",
+        ref: "addresses",
       },
       shippingAddress: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Address",
+        ref: "addresses",
       },
     },
     paymentMethod: {
