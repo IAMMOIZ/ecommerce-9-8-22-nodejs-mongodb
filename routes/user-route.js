@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { getUserListPagination , updateUserDetailsById, updateManyUsersStatus , registerUser, deleteUsers, getUserDetailsByUserId} = require("../controller/user-controller")
+
+const { getUserListPagination , updateUserDetailsById, updateManyUsersStatus , registerUser, deleteUsers, getUserDetailsByUserId ,userNameEmailExist ,forgetPassword} = require("../controller/user-controller")
+
+
+//const { getUserListPagination , updateUserDetailsById, updateManyUsersStatus , registerUser, deleteUsers, getUserDetailsByUserId} = require("../controller/user-controller")
 const { IMAGEHelper , uploadImage } = require("../helpers/image.helper")
 
 
@@ -27,12 +31,18 @@ router.delete("/delete-users", deleteUsers )
 //getUserDetailsByUserId
 router.get("/user-detail/:id", getUserDetailsByUserId )
 
+//user name or email exist
+router.get("/check-user", userNameEmailExist )
+
 //login
 router.post("/login", signin )
 
 
 //login by phone numer params will be country code and mobile number
 router.post("/signin-mobile", signinByMobileNumber )
+
+//forgot password
+router.post("/forget-password", forgetPassword )
 
 //logout
 router.post("/signout", getUserDetailsByUserId )
