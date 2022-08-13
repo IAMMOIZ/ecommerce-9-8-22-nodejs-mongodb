@@ -12,6 +12,8 @@ const brandRoutes = require("./routes/brand-route")
 const categoryRoutes = require("./routes/category-route")
 const subCategoryRoutes = require("./routes/sub-category-route")
 const paymentMethodRoutes = require("./routes/payment.method.route")
+const productRoute = require("./routes/product-route")
+
 //connect database
 connectDB()
 //attech body parser
@@ -44,6 +46,7 @@ app.use("/category" , categoryRoutes )
 app.use("/subcategory" , subCategoryRoutes )
 app.use("/brand" , brandRoutes )
 app.use("/paymentmethod" , paymentMethodRoutes )
+app.use("/product" , productRoute )
 
 
 app.get("/",(req , res )=>{
