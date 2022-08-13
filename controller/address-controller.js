@@ -1,4 +1,4 @@
-const AddressModel  = require("../model/address.model")
+const AddressModel  = require("../model/address-model")
 const addNewAddress = (req , res )=>{
     try{
     const { houseNo , street ,addressLine1 ,addressLine2,city,state , country , pincode , addressType  , type } = req.body;

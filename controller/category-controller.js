@@ -1,8 +1,8 @@
-const CategoryModel = require("../model/category.model")
+const CategoryModel = require("../model/category-model")
 const { CommonStatus } = require("../enum/enum");
-const categoryModel = require("../model/category.model");
+const categoryModel = require("../model/category-model");
 
-const addPaymentMethod = (req , res )=>{
+const addNewCategory = (req , res )=>{
     try{
         let { catName , catNumber } = req.body;
         let categoryObj = new CategoryModel({ catName  , catNumber , status :  CommonStatus.WAIT_FOR_APPROVAL })
@@ -23,7 +23,7 @@ const addPaymentMethod = (req , res )=>{
 }
 
 
-const removePaymentMethodById = (req , res )=>{
+const removeCategoryById = (req , res )=>{
     try{
         let {  catId } = req.params;
         categoryModel.findByIdAndRemove( catId  ,(err ,data)=>{
@@ -43,7 +43,7 @@ const removePaymentMethodById = (req , res )=>{
 }
 
 
-const updatePaymentMethod = (req , res )=>{
+const updateCategory = (req , res )=>{
     try{
         let {  catId } = req.params;
         let {  catName , catNumber  } = req.body;
@@ -65,7 +65,7 @@ const updatePaymentMethod = (req , res )=>{
 }
 
 
-const getAllPaymentMethod = (req , res )=>{
+const getAllCategory = (req , res )=>{
     try{
         page = req.params.page || 0;
         limit = req.params.limit || 10;
@@ -86,7 +86,7 @@ const getAllPaymentMethod = (req , res )=>{
 }
 
 
-const getPaymentMethodById = (req , res )=>{
+const getCategoryById = (req , res )=>{
     try{
         let {  catId } = req.params;
         categoryModel.findById( catId  ,(err ,data)=>{
@@ -107,7 +107,7 @@ const getPaymentMethodById = (req , res )=>{
 }
 
 
-const changePaymentMethodStatus = (req , res )=>{
+const changeCategoryStatus = (req , res )=>{
     try{
         let {  catId , status } = req.params;
         categoryModel.findByIdAndUpdate( catId , { status } ,(err ,data)=>{
@@ -126,7 +126,7 @@ const changePaymentMethodStatus = (req , res )=>{
     }
 }
 
-const getPaymentMethodCount = (req , res )=>{
+const getCategoryCount = (req , res )=>{
     try{
         let {  catId , status } = req.params;
         categoryModel.findByIdAndUpdate( catId , { status } ,(err ,data)=>{
@@ -145,4 +145,6 @@ const getPaymentMethodCount = (req , res )=>{
     }
 }
 
-module.exports = { addPaymentMethod  , removePaymentMethodById , getAllPaymentMethod , getPaymentMethodById , changePaymentMethodStatus , updatePaymentMethod ,getPaymentMethodCount }
+
+
+module.exports = { addNewCategory  , removeCategoryById , updateCategory , getAllCategory , getCategoryById , changeCategoryStatus , getCategoryCount}
