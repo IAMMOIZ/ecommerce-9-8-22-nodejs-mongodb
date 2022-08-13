@@ -61,3 +61,5 @@ profile pictures , product pictures
 payment method --
 
 //next product , cart , order , invoice , trackingorder
+
+//csrf , cors , auth , passport

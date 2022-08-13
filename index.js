@@ -19,6 +19,7 @@ connectDB()
 //attech body parser
 app.use(express.json());
 app.use(express.urlencoded({extended : true }))
+app.use(cors())
 //attech logger
 const options = {
     definition: {

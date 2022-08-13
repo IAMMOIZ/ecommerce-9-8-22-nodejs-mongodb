@@ -348,7 +348,7 @@ module.exports = {
   userNameEmailExist,
   forgetPassword
 };
-
+  
 /*
 insert user data with the address
 get all the userlist with the populate and pagination
