@@ -51,10 +51,13 @@ saller customer admin
 
 get count of all the cat , sub , branch 
 product { add , remove , list , updateone , pagination }
-category { add , remove , list , updateone , pagination}
-subcategory { add , remove , list , updateone , pagination }
-brand { add , remove , list , updateone , pagination }
+category { add , remove , list , updateone , pagination}--
+subcategory { add , remove , list , updateone , pagination }--
+brand { add , remove , list , updateone , pagination }--
 cart for save for later
 orders
 order tracking 
 profile pictures , product pictures 
+payment method --
+
+//next product , cart , order , invoice , trackingorder
