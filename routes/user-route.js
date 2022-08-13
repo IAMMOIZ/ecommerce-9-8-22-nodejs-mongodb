@@ -5,7 +5,7 @@ const { getUserListPagination , updateUserDetailsById, updateManyUsersStatus , r
 
 
 //const { getUserListPagination , updateUserDetailsById, updateManyUsersStatus , registerUser, deleteUsers, getUserDetailsByUserId} = require("../controller/user-controller")
-const { IMAGEHelper , uploadImage } = require("../helpers/image.helper")
+const { IMAGEHelper , uploadImage } = require("../helpers/image-helper")
 
 
 //dummy api for testing
@@ -17,7 +17,7 @@ router.get("/",(req , res )=>{
 router.get("/get-user-list-paggination" , getUserListPagination)
 
 //updateUserDetailsById
-router.put("/update-user-Ddetails/:id", updateUserDetailsById )
+router.put("/update-user-details/:id", updateUserDetailsById )
 
 //disableUsers
 router.patch("/status-user", updateManyUsersStatus )

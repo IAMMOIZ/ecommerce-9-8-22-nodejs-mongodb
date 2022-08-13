@@ -1,4 +1,4 @@
-const UserModel = require("../model/user.model")
+const UserModel = require("../model/user-model")
 const { Role } = require("../enum/enum")
 const jwt = require("jsonwebtoken")
 //refresh token
