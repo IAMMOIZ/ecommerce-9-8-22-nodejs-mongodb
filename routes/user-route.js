@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getUserListPagination , updateUserDetailsById, updateManyUsersStatus , registerUser, deleteUsers, getUserDetailsByUserId} = require("../controller/user-controller")
+const { getUserListPagination , updateUserDetailsById, updateManyUsersStatus , registerUser, deleteUsers, getUserDetailsByUserId ,userNameEmailExist ,forgetPassword} = require("../controller/user-controller")
 
 
 
@@ -27,8 +27,14 @@ router.delete("/delete-users", deleteUsers )
 //getUserDetailsByUserId
 router.get("/user-detail/:id", getUserDetailsByUserId )
 
+//user name or email exist
+router.get("/check-user", userNameEmailExist )
+
 //login
 router.post("/login", getUserDetailsByUserId )
+
+//forgot password
+router.post("/forget-password", forgetPassword )
 
 //logout
 router.post("/logout", getUserDetailsByUserId )
