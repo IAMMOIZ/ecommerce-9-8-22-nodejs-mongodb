@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
-const userModel = require("../model/user.model");
-const { addAddress } = require("../helpers/address.helper");
+const userModel = require("../model/user-model");
+const { addAddress } = require("../helpers/address-helper");
 const { AddressEnum ,CommonStatus } = require("../enum/enum");
 
 //get all user list with PAGGINATION

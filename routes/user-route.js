@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
+//const { getUserListPagination , updateUserDetailsById, updateManyUsersStatus , registerUser, deleteUsers, getUserDetailsByUserId} = require("../controller/user-controller")
+const { IMAGEHelper , uploadImage } = require("../helpers/image.helper")
+
 const { getUserListPagination , updateUserDetailsById, updateManyUsersStatus , registerUser, deleteUsers, getUserDetailsByUserId ,userNameEmailExist ,forgetPassword} = require("../controller/user-controller")
 
 
 //const { getUserListPagination , updateUserDetailsById, updateManyUsersStatus , registerUser, deleteUsers, getUserDetailsByUserId} = require("../controller/user-controller")
-const { IMAGEHelper , uploadImage } = require("../helpers/image.helper")
+const { IMAGEHelper , uploadImage } = require("../helpers/image-helper")
 
 
 //dummy api for testing
@@ -17,7 +20,7 @@ router.get("/",(req , res )=>{
 router.get("/get-user-list-paggination" , getUserListPagination)
 
 //updateUserDetailsById
-router.put("/update-user-Ddetails/:id", updateUserDetailsById )
+router.put("/update-user-details/:id", updateUserDetailsById )
 
 //disableUsers
 router.patch("/status-user", updateManyUsersStatus )
@@ -35,14 +38,7 @@ router.get("/user-detail/:id", getUserDetailsByUserId )
 router.get("/check-user", userNameEmailExist )
 
 //login
-router.post("/login", signin )
-
-
-//login by phone numer params will be country code and mobile number
-router.post("/signin-mobile", signinByMobileNumber )
-
-//forgot password
-router.post("/forget-password", forgetPassword )
+router.post("/login", getUserDetailsByUserId )
 
 //logout
 router.post("/signout", getUserDetailsByUserId )

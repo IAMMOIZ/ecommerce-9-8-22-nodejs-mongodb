@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { addNewBrand  , removeBrandById , updateBrand , getAllBrand , getBrandById , changeBrandStatus ,brandCount} = require("../controller/brand.controller")
+const { addNewBrand  , removeBrandById , updateBrand , getAllBrand , getBrandById , changeBrandStatus ,brandCount} = require("../controller/brand-controller")
 
 router.post("/add-brand",  addNewBrand )
 router.get("/brand-count",  brandCount )

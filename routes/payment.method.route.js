@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { addPaymentMethod  , removePaymentMethodById , getAllPaymentMethod , getPaymentMethodById , changePaymentMethodStatus , updatePaymentMethod , getPaymentMethodCount} = require("../controller/payment.method.controller")
+const { addPaymentMethod  , removePaymentMethodById , getAllPaymentMethod , getPaymentMethodById , changePaymentMethodStatus , updatePaymentMethod , getPaymentMethodCount} = require("../controller/payment-methode-controller")
 
 router.post("/add-paymethod",  addPaymentMethod )
 router.post("/get-paymethod",  getAllPaymentMethod )

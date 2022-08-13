@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { addNewCategory  , removeCategoryById , updateCategory , getAllCategory , getCategoryById , changeCategoryStatus , getCategoryCount} = require("../controller/category.controller")
+const { addNewCategory  , removeCategoryById , updateCategory , getAllCategory , getCategoryById , changeCategoryStatus , getCategoryCount} = require("../controller/category-controller")
 
 router.post("/add-category",  addNewCategory )
 router.post("/category-count",  getCategoryCount )
