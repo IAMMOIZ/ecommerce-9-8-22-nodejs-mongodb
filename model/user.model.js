@@ -1,4 +1,4 @@
-const { Role, SubscriptionType, Gender } = require("../enum/enum");
+const { Role, SubscriptionType, Gender,CommonStatus } = require("../enum/enum");
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
         isPrimary: { type: Boolean },
       },
     ],
-    activeStatus: { type: String, default: "active", required: true }, //need to work
+    activeStatus: { type: String,enum: CommonStatus , default: "WAIT_FOR_APPROVAL", required: true }, //need to work
     address: {
       permanentAddress: {
         type: mongoose.Schema.Types.ObjectId,
