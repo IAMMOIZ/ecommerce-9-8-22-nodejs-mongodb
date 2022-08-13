@@ -1,4 +1,3 @@
-
 //user related apis
 
 add user with nested address calling api post api
@@ -9,6 +8,8 @@ update user password forget password api
 change payment method
 change mobile number
 activestatus
+update profile apis
+update profile apis
 update profile apis
 find user by its phone number in the array
 

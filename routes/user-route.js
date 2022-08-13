@@ -9,6 +9,8 @@ router.get("/",(req , res )=>{
     res.status(200).send("user api working")
 })
 
+//get user list with pagination 
+router.get("/get-user-list-paggination" , getUserListPagination)
 
 //updateUserDetailsById
 router.put("/update-user-Ddetails/:id", updateUserDetailsById )
@@ -23,7 +25,7 @@ router.post("/register-user", registerUser )
 router.post("/delete-users", deleteUsers )
 
 //getUserDetailsByUserId
-router.get("/user-detail/:Id", getUserDetailsByUserId )
+router.get("/user-detail/:id", getUserDetailsByUserId )
 
 //login
 router.post("/login", getUserDetailsByUserId )
