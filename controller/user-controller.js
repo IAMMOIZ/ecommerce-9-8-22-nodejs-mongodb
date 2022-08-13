@@ -36,7 +36,9 @@ const getUserDetailsByUserId = (req, res) => {
       let id = req.params.id;
       userModel
         .findById({ _id: id })
-        .populate("address")
+        .populate("address.permanentAddress")
+        .populate("address.currentAddress")
+        .populate("address.shippingAddress")
         .then((data) => {
           return res.status(200).json({
             total: data.length,
@@ -269,11 +271,39 @@ const requestForSubcription = (req, res) => {
   }
 };
 
-const forgetPassword = (req, res) => {
+const forgetPassword = async(req, res) => {
   try {
+
+    {
+      const { mobileNumber, email, password } = req.body;
+    
+      if(!mobileNumber){var userEmail = await userModel.findOne({email});
+    console.log("!mobile")}
+      else{
+      var numberExists = await userModel.findOne({ mobileNumber });
+      var userEmail = await userModel.findOne({email});
+      }
+      
+      const exist = numberExists || userEmail
+      console.log(exist , "this is exist==========");
+      // hash password
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+    
+      if (exist) {
+        await userModel.findByIdAndUpdate(
+          { _id: exist._id },
+          { $set: { password: hashedPassword } }
+        );
+        res.status(200).json({ msg: "Password Updated Succesfully" });
+      } else {
+        res.status(401).send("email or mobile number not found");
+      }
+    };
+
   } catch (err) {
-    console.log("error from catch block", error);
-    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
+    console.log("error from catch block", err);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
   }
 };
 
@@ -285,19 +315,23 @@ const updateProfileImage = (req, res) => {
   }
 };
 
-//exist user name
-const userNameExist = (req, res) => {
-  try {
-  } catch (err) {
-    console.log("error from catch block", error);
-    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
-  }
-};
+//exist user email or userName
 
-//exist user email
-
-const userEmailExist = (req, res) => {
+const userNameEmailExist = async (req, res) => {
   try {
+      const { userName, email } = req.body;
+    
+      const emailExist = await userModel.findOne({ email });
+    
+      const userNameExist = await userModel.findOne({ userName });
+    
+      let exist = emailExist || userNameExist
+      if (exist) {
+        return res.status(500).json({ msg: "not available" });
+      } else {
+        return res.status(200).json({ msg: "available" });
+      }
+
   } catch (err) {
     console.log("error from catch block", error);
     return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
@@ -311,6 +345,8 @@ module.exports = {
   registerUser,
   deleteUsers,
   getUserDetailsByUserId,
+  userNameEmailExist,
+  forgetPassword
 };
   
 /*
