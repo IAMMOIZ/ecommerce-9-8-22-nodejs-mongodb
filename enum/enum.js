@@ -23,4 +23,8 @@ const AddressEnum = {
     OTHER : "OTHER"
 }
 
-module.exports = { Gender , SubscriptionType , Role , AddressEnum}
+const CommonStatus = {
+    ACTIVE : "ACTIVE" , DEACTIVE : "DEACTIVE", REMOVED : "REMOVED", TEMP_DISABLED : "TEMP_DISABLED" , WAIT_FOR_APPROVAL: "WAIT_FOR_APPROVAL"
+}
+
+module.exports = { Gender , SubscriptionType , Role , AddressEnum ,CommonStatus }
