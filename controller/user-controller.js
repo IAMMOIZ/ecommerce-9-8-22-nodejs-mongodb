@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const userModel = require("../model/user.model");
 const { addAddress } = require("../helpers/address.helper");
-const { AddressEnum } = require("../enum/enum");
+const { AddressEnum ,CommonStatus } = require("../enum/enum");
 
 //get all user list with PAGGINATION
 const getUserListPagination = async (req, res) => {
@@ -29,13 +29,14 @@ const getUserListPagination = async (req, res) => {
   }
 };
 
+//get user details by id 
 const getUserDetailsByUserId = (req, res) => {
   try {
     {
       let id = req.params.id;
       userModel
         .findById({ _id: id })
-        .populate("addresses")
+        .populate("address")
         .then((data) => {
           return res.status(200).json({
             total: data.length,
@@ -57,11 +58,28 @@ const getUserDetailsByUserId = (req, res) => {
   }
 };
 
+//delete multiple user
 const deleteUsers = (req, res) => {
   try {
+    {
+      userModel.deleteMany({ _id: { $in: req.body.id } }, (err, data) => {
+        if (err) {
+          return res
+            .status(400)
+            .json({
+              err,
+              msg: "Your request could not be processed. Please try again.",
+            });
+        } else {
+          return res
+            .status(200)
+            .json({ msg: "user status been  successfully deleted ", data });
+        }
+      });
+    }
   } catch (err) {
-    console.log("error from catch block", error);
-    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
+    console.log("error from catch block", err);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", err: err });
   }
 };
 //addUser
@@ -176,7 +194,74 @@ const registerUser = async (req, res) => {
   }
 };
 
-const disableUsers = (req, res) => {
+//admin can disable user 
+const updateManyUsersStatus = (req, res) => {
+  try {
+
+    if( CommonStatus[req.body.status] ){
+
+    let dataToUpdate = {activeStatus : req.body.status} 
+    userModel.updateMany({ _id: { $in: req.body.id }},dataToUpdate, (err, data) => {
+      if (err) {
+        return res
+          .status(400)
+          .json({
+            err,
+            msg: "Your request could not be processed. Please try again.",
+          });
+      } else {
+        return res
+          .status(200)
+          .json({ msg: "user status been  successfully upated ", data });
+      }
+    })} 
+    else{
+      return res
+          .status(400)
+          .json({ msg: "invalide status " });
+      }
+    
+  } catch (err) {
+    console.log("error from catch block", err);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG",err });
+  }
+};
+
+//update user details 
+const updateUserDetailsById = (req, res) => {
+  try {
+    {
+      let userId = req.params.id;
+      let dataToUpdate = req.body;
+      //1 where , 2 set : what to update
+      userModel.findByIdAndUpdate(
+        { _id: userId },
+        dataToUpdate,
+        (err, data) => {
+          if (err) {
+            return res
+              .status(400)
+              .json({
+                error: err,
+                msg: "Your request could not be processed. Please try again.",
+              });
+          } else {
+            return res
+              .status(200)
+              .json({
+                msg: "user status been updated successfully! as " + data,
+              });
+          }
+        }
+      );
+    }
+  } catch (err) {
+    console.log("error from catch block", error);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
+  }
+};
+
+const requestForSubcription = (req, res) => {
   try {
   } catch (err) {
     console.log("error from catch block", error);
@@ -184,7 +269,34 @@ const disableUsers = (req, res) => {
   }
 };
 
-const updateUserDetailsById = (req, res) => {
+const forgetPassword = (req, res) => {
+  try {
+  } catch (err) {
+    console.log("error from catch block", error);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
+  }
+};
+
+const updateProfileImage = (req, res) => {
+  try {
+  } catch (err) {
+    console.log("error from catch block", error);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
+  }
+};
+
+//exist user name
+const userNameExist = (req, res) => {
+  try {
+  } catch (err) {
+    console.log("error from catch block", error);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
+  }
+};
+
+//exist user email
+
+const userEmailExist = (req, res) => {
   try {
   } catch (err) {
     console.log("error from catch block", error);
@@ -195,7 +307,7 @@ const updateUserDetailsById = (req, res) => {
 module.exports = {
   getUserListPagination,
   updateUserDetailsById,
-  disableUsers,
+  updateManyUsersStatus,
   registerUser,
   deleteUsers,
   getUserDetailsByUserId,

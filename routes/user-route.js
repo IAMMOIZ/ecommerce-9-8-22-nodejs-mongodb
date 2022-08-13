@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getUserListPagination , updateUserDetailsById, disableUsers , registerUser, deleteUsers, getUserDetailsByUserId} = require("../controller/user-controller")
+const { getUserListPagination , updateUserDetailsById, updateManyUsersStatus , registerUser, deleteUsers, getUserDetailsByUserId} = require("../controller/user-controller")
 
 
 
@@ -16,13 +16,13 @@ router.get("/get-user-list-paggination" , getUserListPagination)
 router.put("/update-user-Ddetails/:id", updateUserDetailsById )
 
 //disableUsers
-router.post("/disable-user", disableUsers )
+router.patch("/status-user", updateManyUsersStatus )
 
 //addUser
 router.post("/register-user", registerUser )
 
 //get user list with pagination
-router.post("/delete-users", deleteUsers )
+router.delete("/delete-users", deleteUsers )
 
 //getUserDetailsByUserId
 router.get("/user-detail/:id", getUserDetailsByUserId )
