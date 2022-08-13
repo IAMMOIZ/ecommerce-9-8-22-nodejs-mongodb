@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { addNewSubCategory  , removeSubCategoryById , updateSubCategory , getAllSubCategory , getSubCategoryById , changeSubCategoryStatus , SubCategoryCount} = require("../controller/subcategory-controller")
+const { addNewSubCategory  , getAllsubCategory, removeSubCategoryById , updateSubCategory , getSubCategoryById , changeSubCategoryStatus , SubCategoryCount} = require("../controller/subcategory-controller")
 
 router.post("/add-subcategory",  addNewSubCategory )
-router.post("/get-subcategory",  getAllSubCategory )
+router.post("/get-subcategory",  getAllsubCategory )
 router.post("/update-subcategory/:id",  updateSubCategory )
 router.post("/remove-subcategory/:id",  removeSubCategoryById )
 router.post("/get-subcategory/:id",  getSubCategoryById )
