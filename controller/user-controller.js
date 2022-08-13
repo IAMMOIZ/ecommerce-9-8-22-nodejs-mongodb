@@ -312,7 +312,7 @@ module.exports = {
   deleteUsers,
   getUserDetailsByUserId,
 };
-
+  
 /*
 insert user data with the address
 get all the userlist with the populate and pagination
