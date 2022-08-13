@@ -2,7 +2,7 @@ const CategoryModel = require("../model/category.model")
 const { CommonStatus } = require("../enum/enum");
 const categoryModel = require("../model/category.model");
 
-const addPaymentMethod = (req , res )=>{
+const addProduct = (req , res )=>{
     try{
         let { catName , catNumber } = req.body;
         let categoryObj = new CategoryModel({ catName  , catNumber , status :  CommonStatus.WAIT_FOR_APPROVAL })
@@ -23,7 +23,7 @@ const addPaymentMethod = (req , res )=>{
 }
 
 
-const removePaymentMethodById = (req , res )=>{
+const getFilteredProducts = (req , res )=>{
     try{
         let {  catId } = req.params;
         categoryModel.findByIdAndRemove( catId  ,(err ,data)=>{
@@ -43,7 +43,7 @@ const removePaymentMethodById = (req , res )=>{
 }
 
 
-const updatePaymentMethod = (req , res )=>{
+const updateProduct = (req , res )=>{
     try{
         let {  catId } = req.params;
         let {  catName , catNumber  } = req.body;
@@ -65,7 +65,7 @@ const updatePaymentMethod = (req , res )=>{
 }
 
 
-const getAllPaymentMethod = (req , res )=>{
+const removeProductById = (req , res )=>{
     try{
         page = req.params.page || 0;
         limit = req.params.limit || 10;
@@ -86,7 +86,7 @@ const getAllPaymentMethod = (req , res )=>{
 }
 
 
-const getPaymentMethodById = (req , res )=>{
+const changeProductStatus = (req , res )=>{
     try{
         let {  catId } = req.params;
         categoryModel.findById( catId  ,(err ,data)=>{
@@ -107,7 +107,7 @@ const getPaymentMethodById = (req , res )=>{
 }
 
 
-const changePaymentMethodStatus = (req , res )=>{
+const productCountWithFilter = (req , res )=>{
     try{
         let {  catId , status } = req.params;
         categoryModel.findByIdAndUpdate( catId , { status } ,(err ,data)=>{
@@ -126,7 +126,7 @@ const changePaymentMethodStatus = (req , res )=>{
     }
 }
 
-const getPaymentMethodCount = (req , res )=>{
+const uploadProductImage = (req , res )=>{
     try{
         let {  catId , status } = req.params;
         categoryModel.findByIdAndUpdate( catId , { status } ,(err ,data)=>{
@@ -145,4 +145,24 @@ const getPaymentMethodCount = (req , res )=>{
     }
 }
 
-module.exports = { addPaymentMethod  , removePaymentMethodById , getAllPaymentMethod , getPaymentMethodById , changePaymentMethodStatus , updatePaymentMethod ,getPaymentMethodCount }
+
+const changeMultipleProductStatus = (req , res )=>{
+    try{
+        let {  catId , status } = req.params;
+        categoryModel.findByIdAndUpdate( catId , { status } ,(err ,data)=>{
+            if(err)
+            {
+                console.log("category ERROR",err);
+                return res.status(400).json({ msg : "BED REQUEST" , error : err})
+            }else{
+                console.log("category STATUS UPDATE by id",data);
+                return res.status(200).json({ msg : "CATEGORY STATUS UPDATED" ,data : data })                    
+            }
+        })
+    }catch(err){
+        console.log("error from catch block" , error)
+        return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
+    }
+}
+
+module.exports ={ addProduct  , getFilteredProducts , updateProduct , removeProductById , changeProductStatus , productCountWithFilter , uploadProductImage ,changeMultipleProductStatus }

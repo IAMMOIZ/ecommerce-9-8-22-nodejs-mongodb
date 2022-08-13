@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getUserListPagination , updateUserDetailsById, updateManyUsersStatus , registerUser, deleteUsers, getUserDetailsByUserId ,userNameEmailExist ,forgetPassword} = require("../controller/user-controller")
+const { getUserListPagination , updateUserDetailsById, updateManyUsersStatus , registerUser, deleteUsers, getUserDetailsByUserId} = require("../controller/user-controller")
 
 
 
@@ -19,7 +19,7 @@ router.put("/update-user-Ddetails/:id", updateUserDetailsById )
 router.patch("/status-user", updateManyUsersStatus )
 
 //addUser
-router.post("/register-user", registerUser )
+router.post("/register-user", IMAGEHelper.single('myImage') , uploadImage ,registerUser )
 
 //get user list with pagination
 router.delete("/delete-users", deleteUsers )
@@ -33,10 +33,7 @@ router.get("/check-user", userNameEmailExist )
 //login
 router.post("/login", getUserDetailsByUserId )
 
-//forgot password
-router.post("/forget-password", forgetPassword )
-
 //logout
-router.post("/logout", getUserDetailsByUserId )
+router.post("/signout", getUserDetailsByUserId )
 
 module.exports = router

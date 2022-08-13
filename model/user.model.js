@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema(
     },
     email: { type: String, unique: true, required: true },
     encPassword: { type: String, required: true },
-    profileImage: { type: String, required: true },
+    profileImage: {data:Buffer,contentType: String},
     dateOfBirth: { type: Date, required: true },
     subscriptionType: {
       type: String,

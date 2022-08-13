@@ -1,6 +1,8 @@
 const Role  = {
     ADMIN : 'ADMIN',
-    USER : 'USER'
+    USER : 'USER',
+    SUPERADMIN : "SUPERADMIN",
+    SALLER : "SALLER"
 }
 
 const SubscriptionType = {
