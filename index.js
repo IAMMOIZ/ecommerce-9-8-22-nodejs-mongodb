@@ -13,6 +13,7 @@ const categoryRoutes = require("./routes/category-route")
 const subCategoryRoutes = require("./routes/sub-category-route")
 const paymentMethodRoutes = require("./routes/payment.method.route")
 const productRoute = require("./routes/product-route")
+const countryRoutes = require("./routes/country-router")
 
 //connect database
 connectDB()
@@ -48,6 +49,8 @@ app.use("/subcategory" , subCategoryRoutes )
 app.use("/brand" , brandRoutes )
 app.use("/paymentmethod" , paymentMethodRoutes )
 app.use("/product" , productRoute )
+app.use("/country", countryRoutes)
+
 
 
 app.get("/",(req , res )=>{
