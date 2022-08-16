@@ -1,6 +1,6 @@
 const CategoryModel = require("../model/category-model")
 const { CommonStatus } = require("../enum/enum");
-const categoryModel = require("../model/category-model");
+
 
 const addProduct = (req , res )=>{
     try{

@@ -1,7 +1,7 @@
 const CategoryModel = require("../model/category-model")
 const { CommonStatus } = require("../enum/enum");
-const categoryModel = require("../model/category-model");
 
+//add payment methode
 const addPaymentMethod = (req , res )=>{
     try{
         let { catName , catNumber } = req.body;
@@ -22,7 +22,7 @@ const addPaymentMethod = (req , res )=>{
     }
 }
 
-
+//remove payment methode 
 const removePaymentMethodById = (req , res )=>{
     try{
         let {  catId } = req.params;
@@ -42,7 +42,7 @@ const removePaymentMethodById = (req , res )=>{
     }
 }
 
-
+//update payment methode 
 const updatePaymentMethod = (req , res )=>{
     try{
         let {  catId } = req.params;
@@ -64,7 +64,7 @@ const updatePaymentMethod = (req , res )=>{
     }
 }
 
-
+//get all payment methode 
 const getAllPaymentMethod = (req , res )=>{
     try{
         page = req.params.page || 0;
@@ -85,7 +85,7 @@ const getAllPaymentMethod = (req , res )=>{
     }
 }
 
-
+//get payment methode by id 
 const getPaymentMethodById = (req , res )=>{
     try{
         let {  catId } = req.params;
@@ -106,7 +106,7 @@ const getPaymentMethodById = (req , res )=>{
     }
 }
 
-
+//change payment methode status
 const changePaymentMethodStatus = (req , res )=>{
     try{
         let {  catId , status } = req.params;
@@ -126,6 +126,7 @@ const changePaymentMethodStatus = (req , res )=>{
     }
 }
 
+//get payment methode count 
 const getPaymentMethodCount = (req , res )=>{
     try{
         let {  catId , status } = req.params;
@@ -145,4 +146,5 @@ const getPaymentMethodCount = (req , res )=>{
     }
 }
 
+//export all controller
 module.exports = { addPaymentMethod  , removePaymentMethodById , getAllPaymentMethod , getPaymentMethodById , changePaymentMethodStatus , updatePaymentMethod ,getPaymentMethodCount }

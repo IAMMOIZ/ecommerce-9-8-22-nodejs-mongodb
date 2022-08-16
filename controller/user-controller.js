@@ -84,6 +84,7 @@ const deleteUsers = (req, res) => {
     return res.status(500).json({ msg: "SOMETHING WENT WRONG", err: err });
   }
 };
+
 //addUser
 const registerUser = async (req, res) => {
   try {
@@ -263,14 +264,18 @@ const updateUserDetailsById = (req, res) => {
   }
 };
 
+//request for subscription 
 const requestForSubcription = (req, res) => {
   try {
+
+
   } catch (err) {
     console.log("error from catch block", error);
     return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
   }
 };
 
+//forget password
 const forgetPassword = async(req, res) => {
   try {
 
@@ -307,6 +312,7 @@ const forgetPassword = async(req, res) => {
   }
 };
 
+//update profile image 
 const updateProfileImage = (req, res) => {
   try {
   } catch (err) {
@@ -316,7 +322,6 @@ const updateProfileImage = (req, res) => {
 };
 
 //exist user email or userName
-
 const userNameEmailExist = async (req, res) => {
   try {
       const { userName, email } = req.body;
@@ -338,6 +343,8 @@ const userNameEmailExist = async (req, res) => {
   }
 };
 
+
+//export all controllers
 module.exports = {
   getUserListPagination,
   updateUserDetailsById,
