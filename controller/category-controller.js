@@ -44,7 +44,7 @@ const getCategoryCount = (req, res) => {
   }
 };
 
-//get all category
+//get all category by pagination
 const getAllCategory = (req, res) => {
   try {
     let page = req.query.pageNo - 1;
@@ -68,19 +68,21 @@ const getAllCategory = (req, res) => {
   }
 };
 
-//------------------------------------sohail
-
 //remove category id
 const removeCategoryById = (req, res) => {
   try {
-    let { catId } = req.params;
+    let catId = req.params.id;
     categoryModel.findByIdAndRemove(catId, (err, data) => {
       if (err) {
         console.log("category ERROR", err);
         return res.status(400).json({ msg: "BED REQUEST", error: err });
       } else {
         console.log("category removed by id", data);
-        return res.status(200).json({ msg: "CATEGORY REMOVED", data: data });
+        if (data == null) {
+          return res.status(202).send({ msg: "Data Not Exists" })
+        }
+        return res.status(200).json({ msg: "CATEGORY REMOVED SUCCESSFULLY", data: data });
+
       }
     });
   } catch (err) {
@@ -92,7 +94,7 @@ const removeCategoryById = (req, res) => {
 //update category
 const updateCategory = (req, res) => {
   try {
-    let { catId } = req.params;
+    let catId = req.params.id;
     let { catName, catNumber } = req.body;
     categoryModel.findByIdAndUpdate(
       catId,
@@ -102,8 +104,8 @@ const updateCategory = (req, res) => {
           console.log("category ERROR", err);
           return res.status(400).json({ msg: "BED REQUEST", error: err });
         } else {
-          console.log("category removed by id", data);
-          return res.status(200).json({ msg: "CATEGORY REMOVED", data: data });
+          console.log("Category update Successfull", data);
+          return res.status(200).json({ msg: "Category update Successfully", data: data });
         }
       }
     );
@@ -116,14 +118,18 @@ const updateCategory = (req, res) => {
 //get category by id
 const getCategoryById = (req, res) => {
   try {
-    let { catId } = req.params;
+    let catId = req.params.id;
+    console.log(catId);
     categoryModel.findById(catId, (err, data) => {
       if (err) {
         console.log("category ERROR", err);
-        return res.status(400).json({ msg: "BED REQUEST", error: err });
+        return res.status(400).json({ msg: "Data Not Found", error: err });
       } else {
-        console.log("category removed by id", data);
-        return res.status(200).json({ msg: "CATEGORY REMOVED", data: data });
+        // if (catId != catId) {
+        //   return res.status(202).send({ msg: "Data Not Exists" })
+        // }
+        console.log("category by id", data);
+        return res.status(200).json({ msg: "CATEGORY SHOW", data: data });
       }
     });
   } catch (err) {
@@ -132,21 +138,25 @@ const getCategoryById = (req, res) => {
   }
 };
 
-//cahnge category status
+//update or change category status
 const changeCategoryStatus = (req, res) => {
   try {
-    let { catId, status } = req.params;
-    categoryModel.findByIdAndUpdate(catId, { status }, (err, data) => {
-      if (err) {
-        console.log("category ERROR", err);
-        return res.status(400).json({ msg: "BED REQUEST", error: err });
-      } else {
-        console.log("category STATUS UPDATE by id", data);
-        return res
-          .status(200)
-          .json({ msg: "CATEGORY STATUS UPDATED", data: data });
-      }
-    });
+    let catId = req.params.id;
+    let { status } = req.params;
+    console.log("catstatus===>", status);
+    categoryModel.findByIdAndUpdate(catId,
+      { status },
+      (err, data) => {
+        if (err) {
+          console.log("category ERROR", err);
+          return res.status(400).json({ msg: "BED REQUEST", error: err });
+        } else {
+          console.log("category STATUS UPDATE by id", data);
+          return res
+            .status(200)
+            .json({ msg: "CATEGORY STATUS UPDATED", data: data });
+        }
+      });
   } catch (err) {
     console.log("error from catch block", error);
     return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
@@ -156,10 +166,10 @@ const changeCategoryStatus = (req, res) => {
 //export all controller
 module.exports = {
   addNewCategory,
+  getCategoryCount,
+  getAllCategory,
   removeCategoryById,
   updateCategory,
-  getAllCategory,
   getCategoryById,
   changeCategoryStatus,
-  getCategoryCount,
 };
