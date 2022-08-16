@@ -42,7 +42,7 @@ const swaggerDocs = swaggerJsDoc(options);
 app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use(morgan("dev"))
 app.use("/user" , userRoutes )
-app.use("/address" , addressRoutes )
+// app.use("/address" , addressRoutes )
 app.use("/category" , categoryRoutes )
 app.use("/subcategory" , subCategoryRoutes )
 app.use("/brand" , brandRoutes )
