@@ -275,31 +275,24 @@ const forgetPassword = async(req, res) => {
   try {
 
     {
-      const { mobileNumber, email, password } = req.body;
+      const { email, password } = req.body;
+  
+      const userEmail = await userModel.findOne({ email });
     
-      if(!mobileNumber){var userEmail = await userModel.findOne({email});
-    console.log("!mobile")}
-      else{
-      var numberExists = await userModel.findOne({ mobileNumber });
-      var userEmail = await userModel.findOne({email});
-      }
-      
-      const exist = numberExists || userEmail
-      console.log(exist , "this is exist==========");
       // hash password
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
     
-      if (exist) {
-        await userModel.findByIdAndUpdate(
-          { _id: exist._id },
+      if (userEmail) {
+        await userModel.updateOne(
+          { _id: userEmail._id },
           { $set: { password: hashedPassword } }
         );
         res.status(200).json({ msg: "Password Updated Succesfully" });
       } else {
-        res.status(401).send("email or mobile number not found");
+        res.status(401).send("Unable to update password");
       }
-    };
+    }
 
   } catch (err) {
     console.log("error from catch block", err);

@@ -1,106 +1,267 @@
 {
 	"info": {
-		"_postman_id": "b5421ba8-64ad-48a2-bbcb-341d1a963397",
-		"name": "ecommerce",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "50efdf6d-6f03-4c86-bdb4-545bd47cf7f1",
+		"name": "MERN-MEAN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20469829"
 	},
 	"item": [
 		{
-			"name": "register user",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"firstName\":\"mdddddodddd\",\r\n    \"lastName\":\"aaddadddddd\",\r\n    \"userName\":\"madddddddda\",\r\n    \"email\":\"moiz8dddddddd0@gmDail.com\",\r\n    \"password\":\"abc\",\r\n    \"gender\":\"MALE\",\r\n    \"userRole\" : \"USER\",\r\n    \"subscriptionType\":\"NORMAL\",\r\n    \"profileImage\" : \"asdfadsfdsaf\",\r\n    \"activeStatus\" : \"abc\",\r\n    \"dateOfBirth\" : \"12-10-1996\",\r\n    \"mobile\" : [{ \"countryCode\" : 91, \"number\" : 9898989898 , \"isPrimary\" :  true }],\r\n        \"address\": {\r\n        \"permanentAddress\": {\r\n            \"houseNo\" : 376561,\r\n            \"street\" : 234534,\r\n            \"addressLine1\" : \"bet34gsdggumpura\",\r\n            \"addressLine2\" : \"fakeerpusdfgfsra\",\r\n            \"city\" : \"ujjasfdgin\",\r\n            \"state\" : \"madhyapsdfgsradesh\",\r\n            \"pincode\" : 4560051,\r\n            \"country\" : \"amit\",\r\n            \"addressType\" : \"PERMANENT\"\r\n        },\r\n        \"currentAddress\": {\r\n            \"houseNo\" : 376561,\r\n            \"street\" : 234534,\r\n            \"addressLine1\" : \"bet34gsdggumpura\",\r\n            \"addressLine2\" : \"fakeerpusdfgfsra\",\r\n            \"city\" : \"ujjasfdgin\",\r\n            \"state\" : \"madhyapsdfgsradesh\",\r\n            \"pincode\" : 4560051,\r\n            \"country\" : \"amit\",\r\n            \"addressType\" : \"CURRENT\"\r\n        },\r\n        \"shippingAddress\": {\r\n            \"houseNo\" : 376561,\r\n            \"street\" : 234534,\r\n            \"addressLine1\" : \"bet34gsdggumpura\",\r\n            \"addressLine2\" : \"fakeerpusdfgfsra\",\r\n            \"city\" : \"ujjasfdgin\",\r\n            \"state\" : \"madhyapsdfgsradesh\",\r\n            \"pincode\" : 4560051,\r\n            \"country\" : \"amit\",\r\n            \"addressType\" : \"SHIPPING\"\r\n        }\r\n    }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "user apis",
+			"item": [
+				{
+					"name": "add a user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"fff\",\r\n    \"lastName\":\"fff\",\r\n    \"userName\":\"fff\",\r\n    \"email\":\"fff@gmDail.com\",\r\n    \"password\":\"abc\",\r\n    \"gender\":\"MALE\",\r\n    \"activeStatus\":\"WAIT_FOR_APPROVAL\",\r\n    \"userRole\" : \"USER\",\r\n    \"subscriptionType\":\"NORMAL\",\r\n    \"profileImage\" : \"asdfadsfdsaf\",\r\n    \"dateOfBirth\" : \"12-10-1996\",\r\n    \"mobile\" : [{ \"countryCode\" : 91, \"number\" : 9898989898 , \"isPrimary\" :  true }],\r\n        \"address\": {\r\n        \"permanentAddress\": {\r\n            \"houseNo\" : 376561,\r\n            \"street\" : 234534,\r\n            \"addressLine1\" : \"bet34gsdggumpura\",\r\n            \"addressLine2\" : \"fakeerpusdfgfsra\",\r\n            \"city\" : \"ujjasfdgin\",\r\n            \"state\" : \"madhyapsdfgsradesh\",\r\n            \"pincode\" : 4560051,\r\n            \"country\" : \"amit\",\r\n            \"addressType\" : \"PERMANENT\"\r\n        },\r\n        \"currentAddress\": {\r\n            \"houseNo\" : 376561,\r\n            \"street\" : 234534,\r\n            \"addressLine1\" : \"bet34gsdggumpura\",\r\n            \"addressLine2\" : \"fakeerpusdfgfsra\",\r\n            \"city\" : \"ujjasfdgin\",\r\n            \"state\" : \"madhyapsdfgsradesh\",\r\n            \"pincode\" : 4560051,\r\n            \"country\" : \"amit\",\r\n            \"addressType\" : \"CURRENT\"\r\n        },\r\n        \"shippingAddress\": {\r\n            \"houseNo\" : 376561,\r\n            \"street\" : 234534,\r\n            \"addressLine1\" : \"bet34gsdggumpura\",\r\n            \"addressLine2\" : \"fakeerpusdfgfsra\",\r\n            \"city\" : \"ujjasfdgin\",\r\n            \"state\" : \"madhyapsdfgsradesh\",\r\n            \"pincode\" : 4560051,\r\n            \"country\" : \"amit\",\r\n            \"addressType\" : \"SHIPPING\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/user/register-user",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"register-user"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:3000/user/register-user",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"user",
-						"register-user"
-					]
+				{
+					"name": "get all user with paggination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/get-user-list-paggination?pageNo=1&limit=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"get-user-list-paggination"
+							],
+							"query": [
+								{
+									"key": "pageNo",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user details by id with populate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/user-detail/62fb4d0e5ec06c8e2e2306ed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"user-detail",
+								"62fb4d0e5ec06c8e2e2306ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete single or multiple user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\r\n    [\"62fb4c895ec06c8e2e2306d2\", \r\n    \"62fb4d285ec06c8e2e2306ff\", \r\n    \"62fb4d1b5ec06c8e2e2306f6\"] \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user//delete-users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"",
+								"delete-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update multiple users status Copy",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\r\n    [\"62fb4cf45ec06c8e2e2306db\", \r\n    \"62fb4d015ec06c8e2e2306e4\", \r\n    \"62fb4d0e5ec06c8e2e2306ed\"],\r\n    \"status\" : \"ACTIVE\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/user/status-user",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"status-user"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check existing username or email Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\" : \"\",\r\n    \"email\" : \"aa@gmDail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/user/check-user",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"check-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forget password Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"aaa@gmDail.com\",\r\n    \"password\" : \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/forget-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"forget-password"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "add new address",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "houseNo",
-							"value": "31",
-							"type": "default"
+			"name": "category apis",
+			"item": []
+		},
+		{
+			"name": "sub-category apis",
+			"item": []
+		},
+		{
+			"name": "brand apis",
+			"item": []
+		},
+		{
+			"name": "payment-method apis",
+			"item": []
+		},
+		{
+			"name": "product apis",
+			"item": []
+		},
+		{
+			"name": "address apis",
+			"item": [
+				{
+					"name": "add new address sapratly",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
 						},
-						{
-							"key": "street",
-							"value": "32",
-							"type": "default"
-						},
-						{
-							"key": "addressLine1",
-							"value": "address",
-							"type": "default"
-						},
-						{
-							"key": "addressLine2",
-							"value": "address",
-							"type": "default"
-						},
-						{
-							"key": "city",
-							"value": "ujjain",
-							"type": "default"
-						},
-						{
-							"key": "state",
-							"value": "madhyapradesh",
-							"type": "default"
-						},
-						{
-							"key": "country",
-							"value": "india",
-							"type": "default"
-						},
-						{
-							"key": "pincode",
-							"value": "456001",
-							"type": "default"
-						},
-						{
-							"key": "addressType",
-							"value": "PERMANENT",
-							"type": "default"
+						"url": {
+							"raw": "localhost:3000/address/add-address",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"address",
+								"add-address"
+							]
 						}
-					]
-				},
-				"url": {
-					"raw": "localhost:3000/address/add-address",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"address",
-						"add-address"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }

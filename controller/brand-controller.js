@@ -1,51 +1,58 @@
-
+const brandModel = require("../model/brand-model");
 const { CommonStatus } = require("../enum/enum");
-const brandModel = require("../model/brand.model.js");
 
+//add new brand
 const addNewBrand = (req, res) => {
-    try {
-        let { catId, subCatId, brandName, brandNumber } = req.body;
-        let brandObj = new brandModel({ catId, subCatId, brandName, brandNumber, status: CommonStatus.WAIT_FOR_APPROVAL })
-        brandObj.save((err, data) => {
-            if (err) {
-                console.log("category ERROR", err);
-                return res.status(400).json({ msg: "BED REQUEST", error: err })
-            } else {
-                console.log("category added data", data);
-                return res.status(201).json({ msg: "CATEGORY ADDED", data: data })
-            }
-        })
-    } catch (err) {
-        console.log("error from catch block", err)
-        return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err })
-    }
-}
+  try {
+    let { catId, subCatId, brandName, brandNumber } = req.body;
+    let brandObj = new brandModel({
+      catId,
+      subCatId,
+      brandName,
+      brandNumber,
+      status: CommonStatus.WAIT_FOR_APPROVAL,
+    });
+    brandObj.save((err, data) => {
+      if (err) {
+        console.log("category ERROR", err);
+        return res.status(400).json({ msg: "BED REQUEST", error: err });
+      } else {
+        console.log("category added data", data);
+        return res.status(201).json({ msg: "CATEGORY ADDED", data: data });
+      }
+    });
+  } catch (err) {
+    console.log("error from catch block", err);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
+  }
+};
 
-
+//get all brand list with paggination
 const getAllBrandbyPagination = (req, res) => {
-    try {
-        let page = req.query.pageNo - 1;
-        let limit = req.query.limit;
-        let skip = page * limit;
-        brandModel.find()
-            .populate(['catId', 'subCatId'])  //very important populate() pass in array whweras condition  join two collections
-            .limit(limit)
-            .skip(skip)
-            .exec((err, data) => {
-                if (err) {
-                    return res.status(500).json({ msg: "FAILED", error: err });
-                };
-                res.status(200).json({ msg: "SUCCESS", total: data.length, data: data });
-            });
-    } catch (err) {
-        console.log("error from catch block", err)
-        return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err })
-    }
-}
-
+  try {
+    let page = req.query.pageNo - 1;
+    let limit = req.query.limit;
+    let skip = page * limit;
+    brandModel
+      .find()
+      .populate(["catId", "subCatId"]) //very important populate() pass in array whweras condition  join two collections
+      .limit(limit)
+      .skip(skip)
+      .exec((err, data) => {
+        if (err) {
+          return res.status(500).json({ msg: "FAILED", error: err });
+        }
+        res
+          .status(200)
+          .json({ msg: "SUCCESS", total: data.length, data: data });
+      });
+  } catch (err) {
+    console.log("error from catch block", err);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
+  }
+};
 
 //-------------------------------------------sohail
-
 
 // const removeBrandById = (req, res) => {
 //     try {
@@ -64,7 +71,6 @@ const getAllBrandbyPagination = (req, res) => {
 //         return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error })
 //     }
 // }
-
 
 // const updateBrand = (req, res) => {
 //     try {
@@ -86,7 +92,6 @@ const getAllBrandbyPagination = (req, res) => {
 //     }
 // }
 
-
 // const getAllBrand = (req, res) => {
 //     try {
 //         page = req.params.page || 0;
@@ -106,7 +111,6 @@ const getAllBrandbyPagination = (req, res) => {
 //     }
 // }
 
-
 // const getBrandById = (req, res) => {
 //     try {
 //         let { catId } = req.params;
@@ -125,7 +129,6 @@ const getAllBrandbyPagination = (req, res) => {
 //         return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error })
 //     }
 // }
-
 
 // const changeBrandStatus = (req, res) => {
 //     try {
@@ -164,6 +167,7 @@ const getAllBrandbyPagination = (req, res) => {
 // }
 
 module.exports = {
-    addNewBrand, getAllBrandbyPagination,
-    // removeBrandById, updateBrand, getAllBrand, getBrandById, changeBrandStatus, brandCount 
-}
+  addNewBrand,
+  getAllBrandbyPagination,
+  // removeBrandById, updateBrand, getAllBrand, getBrandById, changeBrandStatus, brandCount
+};

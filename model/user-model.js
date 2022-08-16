@@ -1,4 +1,9 @@
-const { Role, SubscriptionType, Gender,CommonStatus } = require("../enum/enum");
+const {
+  Role,
+  SubscriptionType,
+  Gender,
+  CommonStatus,
+} = require("../enum/enum");
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
@@ -12,7 +17,7 @@ const userSchema = new mongoose.Schema(
     },
     email: { type: String, unique: true, required: true },
     encPassword: { type: String, required: true },
-    profileImage: {data:Buffer,contentType: String},
+    profileImage: { data: Buffer, contentType: String },
     dateOfBirth: { type: Date, required: true },
     subscriptionType: {
       type: String,
@@ -28,7 +33,12 @@ const userSchema = new mongoose.Schema(
         isPrimary: { type: Boolean },
       },
     ],
-    activeStatus: { type: String,enum: CommonStatus , default: "WAIT_FOR_APPROVAL", required: true }, //need to work
+    activeStatus: {
+      type: String,
+      enum: CommonStatus,
+      default: "WAIT_FOR_APPROVAL",
+      required: true,
+    }, //need to work
     address: {
       permanentAddress: {
         type: mongoose.Schema.Types.ObjectId,
