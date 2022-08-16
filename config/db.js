@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 
+
+//mongodb compass connection
 const connectDB = async () => {
   try {
     // const uri = process.env.MONGO_URI || "mongodb://localhost/ecommerce";
-    const uri =  "mongodb://localhost/ecommerce";
+    const uri = "mongodb://localhost/ecommerce";
 
     await mongoose
       .connect(uri, {
