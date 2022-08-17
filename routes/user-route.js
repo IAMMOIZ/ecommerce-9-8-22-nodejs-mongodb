@@ -14,6 +14,8 @@ const {
 
 const { IMAGEHelper, uploadImage } = require("../helpers/image-helper");
 
+const {otpSend, verifyOtp} = require("../helpers/otp-helper")
+
 //dummy api for testing
 router.get("/", (req, res) => {
   res.status(200).send("user api working");
@@ -51,7 +53,10 @@ router.post("/login", getUserDetailsByUserId);
 //logout
 router.post("/signout", getUserDetailsByUserId);
 
-//forget-password
-router.post("/forget-password", forgetPassword)
+//send otp for forget api
+router.post("/send-otp",otpSend)
+
+//verify api for update password
+router.post("/forget-password",verifyOtp, forgetPassword)
 
 module.exports = router;

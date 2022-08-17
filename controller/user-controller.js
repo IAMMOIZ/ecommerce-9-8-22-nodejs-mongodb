@@ -109,9 +109,11 @@ const registerUser = async (req, res) => {
     let encPassword = await bcrypt.hash(password, salt);
     // console.log("encripted password", encPassword)
     //dob me json me dono allowed he like 2/2/2022 or 1-1-1996
+    console.log("-------------01");
     let addressObject = {};
     let promiseArray = [];
     if (address?.permanentAddress) {
+      console.log("234567890-=================");
       promiseArray.push(addAddress(address?.permanentAddress));
     }
     if (address?.shippingAddress) {
@@ -123,6 +125,8 @@ const registerUser = async (req, res) => {
     // console.log("promise array " , promiseArray)
     Promise.all(promiseArray)
       .then(function (results) {
+        console.log("-------------promise");
+
         // console.log("promise all",results[0].data)
         // console.log("promise all",results[1].data)
         // console.log("promise all",results[2].data)
@@ -161,6 +165,7 @@ const registerUser = async (req, res) => {
           profileImage,
           dateUpdate: Date.now(),
         });
+        console.log("-------------02");
         console.log("userData", user);
         user.save((err, data) => {
           console.log(err, data);
@@ -185,10 +190,10 @@ const registerUser = async (req, res) => {
       })
       .catch((err) => {
         console.log("error all", err);
-        console.log("error from catch block", err);
+        console.log("error from then catch block", err);
         return res
           .status(500)
-          .json({ msg: "SOMETHING WENT WRONG", error: err });
+          .json({ msg: "SOMETHING WENT then WRONG", error: err });
       });
   } catch (error) {
     console.log("error from catch block", error);
@@ -271,7 +276,7 @@ const requestForSubcription = (req, res) => {
   }
 };
 
-const forgetPassword = async(req, res) => {
+const forgetPassword = async(req, res) => { 
   try {
 
     {
