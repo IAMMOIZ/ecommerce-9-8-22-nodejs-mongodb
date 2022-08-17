@@ -13,7 +13,7 @@ const SubCategorySchema = new mongoose.Schema(
     status: {
       type: String,
       enum: CommonStatus,
-      default: CommonStatus.WAIT_FOR_APPROVAL,
+      // default: CommonStatus.WAIT_FOR_APPROVAL,
     },
   },
   {

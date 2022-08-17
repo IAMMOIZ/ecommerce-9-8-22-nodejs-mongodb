@@ -1,4 +1,6 @@
 const categoryModel = require("../model//category-model");
+
+const subCategoryModel = require("../model/sub-category.model.js")
 const { CommonStatus } = require("../enum/enum");
 
 //add new category
@@ -25,21 +27,24 @@ const addNewCategory = (req, res) => {
   }
 };
 
+
+//get count and get category by id are same
+
 //get all category count
 const getCategoryCount = (req, res) => {
   try {
-    let catId = req.params.id;
-    categoryModel.findById(catId, (err, data) => {
+    // let catId = req.params.id;
+    categoryModel.count((err, data) => {
       if (err) {
         console.log("category ERROR", err);
         return res.status(400).json({ msg: "BED REQUEST", error: err });
       } else {
         console.log("find categories", data);
-        return res.status(200).json({ msg: "FIND CATEGORY BY ID", data: data });
+        return res.status(200).json({ msg: "SUCCESS", total_Documents: data });
       }
     });
   } catch (err) {
-    console.log("error from catch block", error);
+    console.log("error from catch block", err);
     return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
   }
 };
@@ -110,8 +115,8 @@ const updateCategory = (req, res) => {
       }
     );
   } catch (err) {
-    console.log("error from catch block", error);
-    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
+    console.log("error from catch block", err);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
   }
 };
 
@@ -133,8 +138,8 @@ const getCategoryById = (req, res) => {
       }
     });
   } catch (err) {
-    console.log("error from catch block", error);
-    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
+    console.log("error from catch block", err);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
   }
 };
 
@@ -163,6 +168,26 @@ const changeCategoryStatus = (req, res) => {
   }
 };
 
+
+const getAllCountsAggregate = (req, res) => {
+  try {
+    // let catId = req.params.id;
+    categoryModel.aggregate([{ $match: { status: "DEACTIVE" } }, { $count: "totals" }], (err, data) => {
+      if (err) {
+        console.log("category ERROR", err);
+        return res.status(400).json({ msg: "BED REQUEST", error: err });
+      } else {
+        console.log("find categories", data);
+        return res.status(200).json({ msg: "SUCCESS", total_Documents: data });
+      }
+    });
+  } catch (err) {
+    console.log("error from catch block", err);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
+  }
+};
+
+
 //export all controller
 module.exports = {
   addNewCategory,
@@ -172,4 +197,5 @@ module.exports = {
   updateCategory,
   getCategoryById,
   changeCategoryStatus,
+  getAllCountsAggregate
 };
