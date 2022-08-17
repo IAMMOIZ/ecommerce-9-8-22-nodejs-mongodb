@@ -26,6 +26,7 @@ const userSchema = new mongoose.Schema(
     },
     userRole: { type: String, enum: Role, default: Role.USER },
     gender: { type: String, enum: Gender, default: Gender.NOT_MENTIONED },
+    otp : {type: Number},
     mobile: [
       {
         countryCode: { type: Number },
