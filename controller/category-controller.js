@@ -188,6 +188,37 @@ const getAllCountsAggregate = (req, res) => {
 };
 
 
+const mixCatSubCat = (req, res) => {
+  try {
+    categoryModel.aggregate([{
+      $lookup:{
+        from:"subcategories",
+        localField:"_id",
+        foreignField:"catId",
+        as:"mix data"
+      } 
+    }, 
+    
+  //   {$project:{
+  //     subCatName:1,
+  //     subCatNumber:1
+  //   }
+  // }
+]).exec((err, data)=>{
+      if (err) {
+        console.log("category ERROR", err);
+        return res.status(400).json({ msg: "Data Not Found", error: err });
+      } else {
+        console.log("category by id", data);
+        return res.status(200).json({ msg: "Mix CATEGORY SHOW", data: data });
+      }
+    })
+  } catch (err) {
+    console.log("error from catch block", err);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
+  }
+};
+
 //export all controller
 module.exports = {
   addNewCategory,
@@ -197,5 +228,6 @@ module.exports = {
   updateCategory,
   getCategoryById,
   changeCategoryStatus,
-  getAllCountsAggregate
+  getAllCountsAggregate,
+  mixCatSubCat
 };

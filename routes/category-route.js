@@ -8,7 +8,8 @@ const {
   updateCategory,
   getCategoryById,
   changeCategoryStatus,
-  getAllCountsAggregate
+  getAllCountsAggregate,
+  mixCatSubCat
 } = require("../controller/category-controller");
 
 router.post("/add-category", addNewCategory);
@@ -19,6 +20,7 @@ router.put("/update-category/:id", updateCategory);
 router.post("/get-category/:id", getCategoryById);
 router.patch("/category-status/:id/:status", changeCategoryStatus);
 router.post("/category-aggregate", getAllCountsAggregate);
+router.post("/mix-aggregate", mixCatSubCat);
 
 router.get("/", (req, res) => {
   res.status(200).send("category api working");
