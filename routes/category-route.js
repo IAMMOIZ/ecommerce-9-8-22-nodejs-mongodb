@@ -19,6 +19,7 @@ router.put("/update-category/:id", updateCategory);
 router.post("/get-category/:id", getCategoryById);
 router.patch("/category-status/:id/:status", changeCategoryStatus);
 router.post("/category-aggregate", getAllCountsAggregate);
+router.post("/category-aggregate", getAllCountsAggregate);
 
 router.get("/", (req, res) => {
   res.status(200).send("category api working");
