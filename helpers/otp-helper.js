@@ -1,12 +1,12 @@
 const nodemailer = require("nodemailer");
-
+require("dotenv").config();
 const userModel = require("../model/user-model");
 
 //send otp middelware
 const otpSend = async (req, res, next) => {
   const { email } = req.body;
   const emailExist = await userModel.findOne({ email });
-  console.log("12345", emailExist);
+  
 
   if (emailExist) {
     const otp1 = Math.floor(1000 + Math.random() * 9000);
@@ -15,14 +15,18 @@ const otpSend = async (req, res, next) => {
     //update otp query
     await userModel.updateOne({ _id: emailExist._id }, { $set: { otp: otp1 } });
 
+    const smtp_host = process.env.SMTP_HOST;
+    const sendinblue_port = process.env.SENDINBLUE_PORT;
+    const user_mail = process.env.SENDINBLUE_MAIL;
+    const user_pass = process.env.SENDINBLUE_PASS;
     //otp send by mail
     const transporter = nodemailer.createTransport({
-      host: "smtp-relay.sendinblue.com",
-      port: 587,
+      host: smtp_host,
+      port: sendinblue_port,
       secure: false,
       auth: {
-        user: "ansarimohsin7859@gmail.com",
-        pass: "EM7btqBODKdzaxR6",
+        user: user_mail,
+        pass: user_pass,
       },
     });
 
