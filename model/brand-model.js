@@ -5,11 +5,13 @@ const BrandSchema = new mongoose.Schema(
     catId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
+      unique:true,
       required: [true, "Category Id is required"],
     },
     subCatId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "SubCategory",
+      unique:true,
       required: [true, "Sub Category Id is required"],
     },
     parentCategory: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
