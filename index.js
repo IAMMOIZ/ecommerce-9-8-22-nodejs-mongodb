@@ -13,6 +13,8 @@ const categoryRoutes = require("./routes/category-route")
 const subCategoryRoutes = require("./routes/sub-category-route")
 const paymentMethodRoutes = require("./routes/payment.method.route")
 const productRoute = require("./routes/product-route")
+const cityRoutes = require("./routes/city-route")
+const countryRoutes = require("./routes/country-router")
 
 //connect database
 connectDB();
@@ -44,10 +46,13 @@ app.use(morgan("dev"))
 app.use("/user" , userRoutes )
 // app.use("/address" , addressRoutes )
 app.use("/category" , categoryRoutes )
+app.use("/country",countryRoutes)
+app.use("/city",cityRoutes)
 app.use("/subcategory" , subCategoryRoutes )
 app.use("/brand" , brandRoutes )
 app.use("/paymentmethod" , paymentMethodRoutes )
 app.use("/product" , productRoute )
+
 
 
 app.get("/",(req , res )=>{
