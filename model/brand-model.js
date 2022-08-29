@@ -1,4 +1,4 @@
-const { CommonStatus } = require("../enum/enum");
+const { CommonStatus } = require("../enum/enum");;
 const mongoose = require("mongoose");
 
 

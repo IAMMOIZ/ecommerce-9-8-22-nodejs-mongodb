@@ -1,151 +1,164 @@
-const CategoryModel = require("../model/category-model")
 const { CommonStatus } = require("../enum/enum");
+const subCategoryModel = require("../model/sub-category.model.js");
+
+const addNewSubCategory = (req, res) => {
+  try {
+    let { catId, subCatName, subCatNumber } = req.body;
+    let subCategoryObj = new subCategoryModel({
+      catId,
+      subCatName,
+      subCatNumber,
+      status: CommonStatus.WAIT_FOR_APPROVAL,
+    });
+    subCategoryObj.save((err, data) => {
+      if (err) {
+        console.log("category ERROR", err);
+        return res.status(400).json({ msg: "BED REQUEST", error: err });
+      } else {
+        console.log("category added data", data);
+        return res.status(201).json({ msg: "CATEGORY ADDED", data: data });
+      }
+    });
+  } catch (err) {
+    console.log("error from catch block", err);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
+  }
+};
+
+const getAllsubCategory = (req, res) => {
+  try {
+    let page = req.query.pageNo - 1;
+    let limit = req.query.limit;
+    let skip = page * limit;
+    subCategoryModel
+      .find()
+      .populate("catId")
+      .limit(limit)
+      .skip(skip)
+      .exec((err, data) => {
+        if (err) {
+          return res.status(500).json({ msg: "FAILED", error: err });
+        }
+        res
+          .status(200)
+          .json({ msg: "SUCCESS", total: data.length, data: data });
+      });
+  } catch (err) {
+    console.log("error from catch block", err);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
+  }
+};
 
 
-const addNewSubCategory = (req , res )=>{
-    try{
-        let { catName , catNumber } = req.body;
-        let categoryObj = new CategoryModel({ catName  , catNumber , status :  CommonStatus.WAIT_FOR_APPROVAL })
-        categoryObj.save((err ,data)=>{
-            if(err)
-            {
-                console.log("category ERROR",err);
-                return res.status(400).json({ msg : "BED REQUEST" , error : err})
-            }else{
-                console.log("category added data",data);
-                return res.status(201).json({ msg : "CATEGORY ADDED" ,data : data })                    
-            }
-        })
-    }catch(err){
-        console.log("error from catch block" , error)
-        return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
-    }
-}
+//remove sub category id
+const removeSubCategoryById = (req, res) => {
+  try {
+    let subCatId = req.params.id;
+    subCategoryModel.findByIdAndRemove(subCatId, (err, data) => {
+      if (err) {
+        console.log("Sub category ERROR", err);
+        return res.status(400).json({ msg: "BED REQUEST", error: err });
+      } else {
+        console.log("Sub Category Removed by id", data);
+        if (data == null) {
+          return res.status(202).send({ msg: "Data Not Exists" })
+        }
+        return res.status(200).json({ msg: "SUB CATEGORY REMOVED SUCCESSFULLY", data: data });
 
+      }
+    });
+  } catch (err) {
+    console.log("error from catch block", error);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
+  }
+};
 
-const removeSubCategoryById = (req , res )=>{
-    try{
-        let {  catId } = req.params;
-        categoryModel.findByIdAndRemove( catId  ,(err ,data)=>{
-            if(err)
-            {
-                console.log("category ERROR",err);
-                return res.status(400).json({ msg : "BED REQUEST" , error : err})
-            }else{
-                console.log("category removed by id",data);
-                return res.status(200).json({ msg : "CATEGORY REMOVED" ,data : data })                    
-            }
-        })
-    }catch(err){
-        console.log("error from catch block" , error)
-        return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
-    }
-}
+const updateSubCategory = (req, res) => {
+  try {
+    let subCatId = req.params.id;
+    let { subCatName, subCatNumber } = req.body;
+    subCategoryModel.findByIdAndUpdate(
+      subCatId,
+      { subCatName, subCatNumber },
+      (err, data) => {
+        if (err) {
+          console.log("category ERROR", err);
+          return res.status(400).json({ msg: "BED REQUEST", error: err });
+        } else {
+          console.log("sub category update by id", data);
+          return res.status(200).json({ msg: "Sub Category update Successfully", data: data });
+        }
+      }
+    );
+  } catch (err) {
+    console.log("error from catch block", error);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
+  }
+};
 
+const getSubCategoryById = (req, res) => {
+  try {
+    let { id } = req.params;
+    subCategoryModel.findById(id, (err, data) => {
+      if (err) {
+        console.log("category ERROR", err);
+        return res.status(400).json({ msg: "BED REQUEST", error: err });
+      } else {
 
-const updateSubCategory = (req , res )=>{
-    try{
-        let {  catId } = req.params;
-        let {  catName , catNumber  } = req.body;
-        categoryModel.findByIdAndUpdate( catId , { catName , catNumber } ,(err ,data)=>{
-            if(err)
-            {
-                console.log("category ERROR",err);
-                return res.status(400).json({ msg : "BED REQUEST" , error : err})
-            }else{
-                console.log("category removed by id",data);
-                return res.status(200).json({ msg : "CATEGORY REMOVED" ,data : data })                    
-            }
-        })
+        return res.status(200).json({ msg: "SUB CATEGORY FIND SUCCESSFULLY", data: data });
+      }
+    }).populate("catId");
+  } catch (err) {
+    console.log("error from catch block", error);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
+  }
+};
 
-    }catch(err){
-        console.log("error from catch block" , error)
-        return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
-    }
-}
+//update or change Subcategory status
+const changeSubCategoryStatus = (req, res) => {
+  try {
+    let subCatId = req.params.id;
+    let { status } = req.query;
+    subCategoryModel.findByIdAndUpdate(subCatId,
+      { status },
+      (err, data) => {
+        if (err) {
+          return res.status(400).json({ msg: "BED REQUEST", error: err });
+        } else {
+          return res.status(200).json({ msg: "SUB CATEGORY STATUS UPDATED", data: data });
+        }
+      });
+  } catch (err) {
+    console.log("error from catch block", error);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
+  }
+};
 
+//get all subcategory count
+const getSubCategoryCount = (req, res) => {
+  try {
+    
+    subCategoryModel.count((err, data) => {
+      if (err) {
+        console.log("category ERROR", err);
+        return res.status(400).json({ msg: "BED REQUEST", error: err });
+      } else {
+        console.log("find subcategories", data);
+        return res.status(200).json({ msg: "SUCCESS", total_Documents: data });
+      }
+    });
+  } catch (err) {
+    console.log("error from catch block", error);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
+  }
+};
 
-const getAllSubCategory = (req , res )=>{
-    try{
-        page = req.params.page || 0;
-        limit = req.params.limit || 10;
-        CategoryModel.find()
-        .skip(page * limit)
-        .limit(pageOptions.limit)
-        .exec(function (err, data) {
-            if(err)
-            {
-                return res.status(500).json({ msg : "FAILED" , error : err }); 
-            };
-            res.status(200).json({ msg : "SUCCESS" , data : data});
-        });
-    }catch(err){
-        console.log("error from catch block" , error)
-        return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
-    }
-}
-
-
-const getSubCategoryById = (req , res )=>{
-    try{
-        let {  catId } = req.params;
-        categoryModel.findById( catId  ,(err ,data)=>{
-            if(err)
-            {
-                console.log("category ERROR",err);
-                return res.status(400).json({ msg : "BED REQUEST" , error : err})
-            }else{
-                console.log("category removed by id",data);
-                return res.status(200).json({ msg : "CATEGORY REMOVED" ,data : data })                    
-            }
-        })
-
-    }catch(err){
-        console.log("error from catch block" , error)
-        return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
-    }
-}
-
-
-const changeSubCategoryStatus = (req , res )=>{
-    try{
-        let {  catId , status } = req.params;
-        categoryModel.findByIdAndUpdate( catId , { status } ,(err ,data)=>{
-            if(err)
-            {
-                console.log("category ERROR",err);
-                return res.status(400).json({ msg : "BED REQUEST" , error : err})
-            }else{
-                console.log("category STATUS UPDATE by id",data);
-                return res.status(200).json({ msg : "CATEGORY STATUS UPDATED" ,data : data })                    
-            }
-        })
-    }catch(err){
-        console.log("error from catch block" , error)
-        return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
-    }
-}
-
-
-const SubCategoryCount = (req , res )=>{
-    try{
-        let {  catId , status } = req.params;
-        categoryModel.findByIdAndUpdate( catId , { status } ,(err ,data)=>{
-            if(err)
-            {
-                console.log("category ERROR",err);
-                return res.status(400).json({ msg : "BED REQUEST" , error : err})
-            }else{
-                console.log("category STATUS UPDATE by id",data);
-                return res.status(200).json({ msg : "CATEGORY STATUS UPDATED" ,data : data })                    
-            }
-        })
-    }catch(err){
-        console.log("error from catch block" , error)
-        return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
-    }
-}
-
-
-
-module.exports = { addNewSubCategory  , removeSubCategoryById , updateSubCategory , getAllSubCategory , getSubCategoryById , changeSubCategoryStatus , SubCategoryCount}
+module.exports = {
+  addNewSubCategory,
+  getAllsubCategory,
+  removeSubCategoryById,
+  updateSubCategory,
+  getSubCategoryById,
+  changeSubCategoryStatus,
+  getSubCategoryCount,
+};

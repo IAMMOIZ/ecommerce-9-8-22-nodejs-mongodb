@@ -1,6 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
+const {
+  getUserListPagination,
+  updateUserDetailsById,
+  updateManyUsersStatus,
+  registerUser,
+  deleteUsers,
+  getUserDetailsByUserId,
+  userNameEmailExist,
+  forgetPassword,
+} = require("../controller/user-controller");
 
 const {
   getUserListPagination,
@@ -13,7 +23,7 @@ const {
   forgetPassword,
 } = require("../controller/user-controller");
 
-const { IMAGEHelper, uploadImage } = require("../helpers/image-helper");
+const {otpSend, verifyOtp} = require("../helpers/otp-helper")
 
 //dummy api for testing
 router.get("/", (req, res) => {
@@ -32,8 +42,8 @@ router.patch("/status-user", updateManyUsersStatus);
 //addUser
 router.post(
   "/register-user",
-  IMAGEHelper.single("myImage"),
-  uploadImage,
+  // IMAGEHelper.single("myImage"),
+  // uploadImage,
   registerUser
 );
 
@@ -51,5 +61,11 @@ router.post("/login", getUserDetailsByUserId);
 
 //logout
 router.post("/signout", getUserDetailsByUserId);
+
+//send otp for forget api
+router.post("/send-otp",otpSend)
+
+//verify api for update password
+router.post("/forget-password",verifyOtp, forgetPassword)
 
 module.exports = router;

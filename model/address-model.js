@@ -1,4 +1,4 @@
-const { AddressEnum } = require("../enum/enum");
+const { AddressEnum } = require("../enum/enum");;
 const mongoose = require("mongoose");
 
 

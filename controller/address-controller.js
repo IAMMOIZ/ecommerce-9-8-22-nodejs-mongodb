@@ -1,6 +1,6 @@
-const AddressModel = require("../model/address-model");
+const addressModel = require("../model/address-model");
 
-//add address controller
+//add address
 const addNewAddress = (req, res) => {
   try {
     const {
@@ -16,7 +16,9 @@ const addNewAddress = (req, res) => {
       type,
     } = req.body;
 
-    const address = new AddressModel({
+    console.log(req.body , "this ----------")
+
+    const address = new addressModel({
       houseNo,
       street,
       addressLine1,

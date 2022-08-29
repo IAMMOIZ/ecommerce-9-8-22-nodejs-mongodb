@@ -16,7 +16,7 @@ router.post("/add-product", addProduct);
 router.post("/get-product-filter", getFilteredProducts);
 router.patch("/update-product/:id", updateProduct);
 router.delete("/remove-product/:id", removeProductById);
-// router.get("/product-detail/:id", getProductById);
+// router.get("/product-detail/:id",  getProductById )
 router.patch("/product-status/:id/:status", changeProductStatus);
 ///product count :catid/:subcatid/:brandid/:bysaller
 router.get("/product-count", productCountWithFilter);

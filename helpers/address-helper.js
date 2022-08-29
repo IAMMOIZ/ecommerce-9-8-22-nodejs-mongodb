@@ -6,11 +6,3 @@ const addAddress = function (body) {
 };
 
 module.exports = { addAddress };
-
-// const addAddress= (body)=>{
-//     //permanent address
-//     const addPermanentAdd = (req , res , next)=>{
-
-//     }
-
-// }

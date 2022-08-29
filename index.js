@@ -18,8 +18,8 @@ const productRoute = require("./routes/product-route");
 connectDB();
 //attech body parser
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-// app.use(cors());
+app.use(express.urlencoded({extended : true }))
+app.use(cors())
 //attech logger
 const options = {
   definition: {
@@ -53,7 +53,7 @@ app.get("/", (req, res) => {
   return res.status(200).send("api is up and working");
 });
 
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, (err) => {
   if (err) {
