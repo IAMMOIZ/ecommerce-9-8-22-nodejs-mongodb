@@ -5,7 +5,7 @@ const {
   getAllBrandbyPagination,
   removeBrandById,
   updateBrand,
-
+  getAllBrand,
   getBrandById,
   changeBrandStatus,
   brandCount,

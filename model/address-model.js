@@ -1,7 +1,5 @@
-const { AddressEnum } = require("../enum/enum");;
+const { AddressEnum } = require("../enum/enum");
 const mongoose = require("mongoose");
-
-
 const AddressSchema = new mongoose.Schema(
   {
     houseNo: { type: Number },
