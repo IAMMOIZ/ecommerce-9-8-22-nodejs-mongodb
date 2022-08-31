@@ -102,7 +102,7 @@ const getPaymentMethodById = (req, res) => {
     return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
   }
 };
-
+//change payment methode status
 const changePaymentMethodStatus = (req, res) => {
   try {
     let { catId, status } = req.params;
@@ -123,6 +123,7 @@ const changePaymentMethodStatus = (req, res) => {
   }
 };
 
+//get payment methode count 
 const getPaymentMethodCount = (req, res) => {
   try {
     let { catId, status } = req.params;
@@ -152,3 +153,6 @@ module.exports = {
   updatePaymentMethod,
   getPaymentMethodCount,
 };
+
+//export all controller
+module.exports = { addPaymentMethod  , removePaymentMethodById , getAllPaymentMethod , getPaymentMethodById , changePaymentMethodStatus , updatePaymentMethod ,getPaymentMethodCount }

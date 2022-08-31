@@ -94,68 +94,84 @@ const updateBrand = (req, res) => {
 }
 
 
-const getBrandById = (req, res) => {
-  try {
-    let brandId = req.params.id;
-    brandModel.findById(brandId, (err, data) => {
-      if (err) {
-        console.log("category ERROR", err);
-        return res.status(400).json({ msg: "BED REQUEST", error: err })
-      } else {
-        console.log("category removed by id", data);
-        return res.status(200).json({ msg: "find brand with id", data: data })
-      }
-    }).populate(["catId", "subCatId"])
-  } catch (err) {
-    console.log("error from catch block", err)
-    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err })
-  }
-}
-
-const changeBrandStatus = (req, res) => {
-  try {
-    let BrandId = req.params.id;
-    let { status } = req.query;
-    brandModel.findByIdAndUpdate(BrandId, { status }, (err, data) => {
-      if (err) {
-        console.log("category ERROR", err);
-        return res.status(400).json({ msg: "BED REQUEST", error: err })
-      } else {
-        console.log("category STATUS UPDATE by id", data);
-        return res.status(200).json({ msg: "BRAND STATUS HAS BEEN UPDATE", data: data })
-      }
-    })
-  } catch (err) {
-    console.log("error from catch block", err)
-    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err })
-  }
-}
-
-const brandCount = (req, res) => {
-    try {
-    
-      brandModel.count((err, data) => {
-            if (err) {
-                console.log("category ERROR", err);
-                return res.status(400).json({ msg: "BED REQUEST", error: err })
-            } else {
-                console.log("category STATUS UPDATE by id", data);
-                return res.status(200).json({ msg: "SUCCESS", total_Documents: data })
-            }
-        })
-    } catch (err) {
-        console.log("error from catch block", error)
-        return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error })
+const getAllBrand = (req , res )=>{
+    try{
+        page = req.params.page || 0;
+        limit = req.params.limit || 10;
+        CategoryModel.find()
+        .skip(page * limit)
+        .limit(pageOptions.limit)
+        .exec(function (err, data) {
+            if(err)
+            {
+                return res.status(500).json({ msg : "FAILED" , error : err }); 
+            };
+            res.status(200).json({ msg : "SUCCESS" , data : data});
+        });
+    }catch(err){
+        console.log("error from catch block" , error)
+        return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
     }
 }
 
-module.exports = {
-  addNewBrand,
-  getAllBrandbyPagination,
-  removeBrandById,
-  updateBrand,
-  
-  getBrandById,
-  changeBrandStatus,
-  brandCount
-};
+
+const getBrandById = (req , res )=>{
+    try{
+        let {  catId } = req.params;
+        categoryModel.findById( catId  ,(err ,data)=>{
+            if(err)
+            {
+                console.log("category ERROR",err);
+                return res.status(400).json({ msg : "BED REQUEST" , error : err})
+            }else{
+                console.log("category removed by id",data);
+                return res.status(200).json({ msg : "CATEGORY REMOVED" ,data : data })                    
+            }
+        })
+
+    }catch(err){
+        console.log("error from catch block" , error)
+        return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
+    }
+}
+
+
+const changeBrandStatus = (req , res )=>{
+    try{
+        let {  catId , status } = req.params;
+        categoryModel.findByIdAndUpdate( catId , { status } ,(err ,data)=>{
+            if(err)
+            {
+                console.log("category ERROR",err);
+                return res.status(400).json({ msg : "BED REQUEST" , error : err})
+            }else{
+                console.log("category STATUS UPDATE by id",data);
+                return res.status(200).json({ msg : "CATEGORY STATUS UPDATED" ,data : data })                    
+            }
+        })
+    }catch(err){
+        console.log("error from catch block" , error)
+        return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
+    }
+}
+
+const brandCount =(req , res )=>{
+    try{
+        let {  catId , status } = req.params;
+        categoryModel.findByIdAndUpdate( catId , { status } ,(err ,data)=>{
+            if(err)
+            {
+                console.log("category ERROR",err);
+                return res.status(400).json({ msg : "BED REQUEST" , error : err})
+            }else{
+                console.log("category STATUS UPDATE by id",data);
+                return res.status(200).json({ msg : "CATEGORY STATUS UPDATED" ,data : data })                    
+            }
+        })
+    }catch(err){
+        console.log("error from catch block" , error)
+        return res.status(500).json({ msg : "SOMETHING WENT WRONG" ,error : error})    
+    }
+}
+
+module.exports = { addNewBrand  , removeBrandById , updateBrand , getAllBrand , getBrandById , changeBrandStatus ,brandCount}

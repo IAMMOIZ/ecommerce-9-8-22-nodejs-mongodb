@@ -231,3 +231,5 @@ module.exports = {
   getAllCountsAggregate,
   mixCatSubCat
 };
+
+module.exports = { addNewCategory  , removeCategoryById , updateCategory , getAllCategory , getCategoryById , changeCategoryStatus , getCategoryCount}
