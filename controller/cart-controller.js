@@ -1,7 +1,7 @@
 const { CommonStatus } = require("../enum/enum");
 const categoryModel = require("../model/category-model");
 
-const addProduct = (req, res) => {
+const addProductToCart = (req, res) => {
   try {
     let { catName, catNumber } = req.body;
     let categoryObj = new categoryModel({
@@ -24,7 +24,7 @@ const addProduct = (req, res) => {
   }
 };
 
-const getFilteredProducts = (req, res) => {
+const getCartInfoByUserId = (req, res) => {
   try {
     let { catId } = req.params;
     categoryModel.findByIdAndRemove(catId, (err, data) => {
@@ -41,8 +41,8 @@ const getFilteredProducts = (req, res) => {
     return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
   }
 };
-
-const updateProduct = (req, res) => {
+//used for updating qty of product , remove and add more products into cart
+const updateCartByIdAndData = (req, res) => {
   try {
     let { catId } = req.params;
     let { catName, catNumber } = req.body;
@@ -65,7 +65,7 @@ const updateProduct = (req, res) => {
   }
 };
 
-const removeProductById = (req, res) => {
+const removeCart = (req, res) => {
   try {
     page = req.params.page || 0;
     limit = req.params.limit || 10;
@@ -84,8 +84,8 @@ const removeProductById = (req, res) => {
     return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
   }
 };
-
-const changeProductStatus = (req, res) => {
+//when user done with placing order then crone job will remove this unwanted cart 
+const changeCartStatus = (req, res) => {
   try {
     let { catId } = req.params;
     categoryModel.findById(catId, (err, data) => {
@@ -102,47 +102,7 @@ const changeProductStatus = (req, res) => {
     return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
   }
 };
-
-const productCountWithFilter = (req, res) => {
-  try {
-    let { catId, status } = req.params;
-    categoryModel.findByIdAndUpdate(catId, { status }, (err, data) => {
-      if (err) {
-        console.log("category ERROR", err);
-        return res.status(400).json({ msg: "BED REQUEST", error: err });
-      } else {
-        console.log("category STATUS UPDATE by id", data);
-        return res
-          .status(200)
-          .json({ msg: "CATEGORY STATUS UPDATED", data: data });
-      }
-    });
-  } catch (err) {
-    console.log("error from catch block", error);
-    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
-  }
-};
-
-const uploadProductImage = (req, res) => {
-  try {
-    let { catId, status } = req.params;
-    categoryModel.findByIdAndUpdate(catId, { status }, (err, data) => {
-      if (err) {
-        console.log("category ERROR", err);
-        return res.status(400).json({ msg: "BED REQUEST", error: err });
-      } else {
-        console.log("category STATUS UPDATE by id", data);
-        return res
-          .status(200)
-          .json({ msg: "CATEGORY STATUS UPDATED", data: data });
-      }
-    });
-  } catch (err) {
-    console.log("error from catch block", error);
-    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
-  }
-};
-
+//extra controller for future use
 const changeMultipleProductStatus = (req, res) => {
   try {
     let { catId, status } = req.params;
@@ -164,12 +124,9 @@ const changeMultipleProductStatus = (req, res) => {
 };
 
 module.exports = {
-  addProduct,
-  getFilteredProducts,
-  updateProduct,
-  removeProductById,
-  changeProductStatus,
-  productCountWithFilter,
-  uploadProductImage,
-  changeMultipleProductStatus,
+    addProductToCart,
+    getCartInfoByUserId,
+    updateCartByIdAndData,
+    removeCart,
+    changeCartStatus,
 };

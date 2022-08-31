@@ -1,7 +1,5 @@
-const { CommonStatus } = require("../enum/enum");;
+const { CommonStatus } = require("../enum/enum");
 const mongoose = require("mongoose");
-
-
 const CategorySchema = new mongoose.Schema(
   {
     catName: { type: String, required: true },
