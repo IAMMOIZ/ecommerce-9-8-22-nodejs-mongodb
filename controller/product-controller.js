@@ -1,5 +1,5 @@
 const { CommonStatus } = require("../enum/enum");
-const categoryModel = require("../model/category-model");
+
 
 const addProduct = (req, res) => {
   try {

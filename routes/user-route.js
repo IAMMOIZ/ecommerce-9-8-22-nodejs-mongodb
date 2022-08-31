@@ -12,7 +12,16 @@ const {
   forgetPassword,
 } = require("../controller/user-controller");
 
-const { IMAGEHelper, uploadImage } = require("../helpers/image-helper");
+const {
+  getUserListPagination,
+  updateUserDetailsById,
+  updateManyUsersStatus,
+  registerUser,
+  deleteUsers,
+  getUserDetailsByUserId,
+  userNameEmailExist,
+  forgetPassword,
+} = require("../controller/user-controller");
 
 const {otpSend, verifyOtp} = require("../helpers/otp-helper")
 

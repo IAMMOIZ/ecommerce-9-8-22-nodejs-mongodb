@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema(
     subscriptionType: {
       type: String,
       enum: SubscriptionType,
-      default: SubscriptionType.NOMAL,
+      default: SubscriptionType.NORMAL,
     },
     userRole: { type: String, enum: Role, default: Role.USER },
     gender: { type: String, enum: Gender, default: Gender.NOT_MENTIONED },

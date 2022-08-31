@@ -1,23 +1,9 @@
-const { CommonStatus } = require("../enum/enum");
+const { CommonStatus } = require("../enum/enum");;
 const mongoose = require("mongoose");
+
+
 const BrandSchema = new mongoose.Schema(
   {
-    catId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
-      unique:true,
-      required: [true, "Category Id is required"],
-    },
-    subCatId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "SubCategory",
-      unique:true,
-      required: [true, "Sub Category Id is required"],
-    },
-    parentCategory: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
-    parentSubCategory: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "SubCategory" },
-    ],
     brandName: { type: String, required: true },
     brandNumber: { type: String, required: true, unique: true },
     status: {
@@ -25,6 +11,10 @@ const BrandSchema = new mongoose.Schema(
       enum: CommonStatus,
       default: CommonStatus.WAIT_FOR_APPROVAL,
     },
+    parentCategory: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
+    parentSubCategory: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "SubCategory" },
+    ],
   },
   {
     timestamps: true,
