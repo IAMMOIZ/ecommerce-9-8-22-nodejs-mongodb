@@ -1,6 +1,6 @@
-const countryModel = require("../model/country-model")
+const countryModel = require("../model/state-model")
 
-addCountry = (req,res)=>{
+addState = (req,res)=>{
 const {countryName,countryCode,dateCreated,dateUpdated,status} = req.body;
 
 const country = new countryModel({countryName,countryCode,dateCreated,dateUpdated,status})
@@ -16,7 +16,7 @@ country.save((err,data)=>{
 
 }
 
-getAllCountryByPagination = (req,res)=>{
+getAllStateByPagination = (req,res)=>{
     let page = req.query.page-1
     let limit = req.query.limit
     let skip = page*limit
@@ -30,7 +30,7 @@ getAllCountryByPagination = (req,res)=>{
 }
 
 
-getCountryDetailsById = (req , res )=>{
+getStateDetailsById = (req , res )=>{
      let countryId = req.params.id;
     console.log("params",countryId)
      countryModel.findById(countryId , ( err,data)=>{
@@ -42,7 +42,8 @@ getCountryDetailsById = (req , res )=>{
         return res.status(201).json({result:data, msg:" country"})
     })
 }
-deleteCountry = (req ,res)=>{
+
+deleteStateById = (req ,res)=>{
     let countryId = req.params.id;
 
     countryModel.findOneAndDelete({_id : countryId}).then((data)=>{
@@ -52,7 +53,7 @@ deleteCountry = (req ,res)=>{
     })
 }
 
-deletecountryById = (req ,res)=>{
+deleteStates = (req ,res)=>{
     let countryId = req.params.id;
 
     countryModel.findOneAndDelete({_id : countryId}).then((data)=>{
@@ -62,7 +63,7 @@ deletecountryById = (req ,res)=>{
     })
 }
 
-updateCountrybyId = (req , res)=>{
+updateStatebyId = (req , res)=>{
     let id = req.params.id;
 
     let countryName = req.body.countryName;
@@ -81,7 +82,7 @@ updateCountrybyId = (req , res)=>{
 
 }
 
-countryStatus = (req,res)=>{
+stateStatus = (req,res)=>{
     let id = req.params.id;
 
     let countrystatus = req.query.status;
@@ -98,4 +99,4 @@ countryStatus = (req,res)=>{
     })
 }
  
-module.exports = {addCountry,getAllCountryByPagination,getCountryDetailsById,deletecountryById,updateCountrybyId,countryStatus}
+module.exports = { addState,getAllStateByPagination,getStateDetailsById,deleteStateById,updateStatebyId,stateStatus}

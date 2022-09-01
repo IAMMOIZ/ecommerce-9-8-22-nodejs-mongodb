@@ -232,4 +232,4 @@ module.exports = {
   mixCatSubCat
 };
 
-module.exports = { addNewCategory  , removeCategoryById , updateCategory , getAllCategory , getCategoryById , changeCategoryStatus , getCategoryCount}
+//module.exports = { addNewCategory  , removeCategoryById , updateCategory , getAllCategory , getCategoryById , changeCategoryStatus , getCategoryCount}
