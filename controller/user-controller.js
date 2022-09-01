@@ -84,6 +84,7 @@ const deleteUsers = (req, res) => {
     return res.status(500).json({ msg: "SOMETHING WENT WRONG", err: err });
   }
 };
+
 //addUser
 const registerUser = async (req, res) => {
   try {
