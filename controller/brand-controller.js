@@ -174,4 +174,4 @@ const brandCount =(req , res )=>{
     }
 }
 
-module.exports = { addNewBrand  , removeBrandById , updateBrand , getAllBrand , getBrandById , changeBrandStatus ,brandCount}
+module.exports = { addNewBrand  , removeBrandById , updateBrand , getAllBrand , getBrandById , changeBrandStatus ,brandCount , getAllBrandbyPagination}

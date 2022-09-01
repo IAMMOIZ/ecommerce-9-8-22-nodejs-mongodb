@@ -2,8 +2,26 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerJsdoc =  require('swagger-jsdoc');
 const swaggerUI = require("swagger-ui-express");
+const cors = require("cors")
+const options = {
+  definition : {
+    openapi : '3.0.0',
+    info : {
+      title : "nodejs ecommerce apis",
+      version : "1.0.0"
+    },
+    servers :  [{
+      url : 'http://localhost:3000'
+    }],
+  },
+  apis : ['./routes/*-route.js' , './index.js']
+}
+
+const swaggerspec = swaggerJsdoc(options)
+app.use("/api-docs" , swaggerUI.serve , swaggerUI.setup(swaggerspec))
+
 const connectDB = require("./config/db");
 //import routes
 const addressRoutes = require("./routes/address-route")
@@ -25,27 +43,8 @@ connectDB();
 //attech body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(cors())
-//attech logger
-const options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Ecommerce API",
-      version: "1.0.0",
-      description: "REST full api for an ecommerce application",
-    },
-    servers: [
-      {
-        url: "http://localhost:3000/api",
-      },
-    ],
-  },
-  apis: ["./routes/*.js"],
-};
-const swaggerDocs = swaggerJsDoc(options);
-// Routes
-app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+app.use(cors())
+
 app.use(morgan("dev"))
 //routes for the apis
 app.use("/address" , addressRoutes )
@@ -61,8 +60,16 @@ app.use("/review" , reviewRoutes )
 app.use("/state" , stateRoutes )
 app.use("/subcategory" , subCategoryRoutes )
 app.use("/user" , userRoutes )
-
-
+/**
+  * @swagger
+  * /:
+  *   get:
+  *     summary: Returns a list of users.
+  *     description: Optional extended description in CommonMark or HTML
+  *     responses:
+  *       '200':
+  *        description: api is up and working    
+*/
 app.get("/",(req , res )=>{
     return res.status(200).send("api is up and working")
 })
