@@ -1,15 +1,16 @@
 const { CommonStatus } = require("../enum/enum");
-const categoryModel = require("../model/category-model");
+const subCategoryModel = require("../model/sub-category.model.js");
 
-const addProduct = (req, res) => {
+const addNewReviewForSaller = (req, res) => {
   try {
-    let { catName, catNumber } = req.body;
-    let categoryObj = new categoryModel({
-      catName,
-      catNumber,
+    let { catId, subCatName, subCatNumber } = req.body;
+    let subCategoryObj = new subCategoryModel({
+      catId,
+      subCatName,
+      subCatNumber,
       status: CommonStatus.WAIT_FOR_APPROVAL,
     });
-    categoryObj.save((err, data) => {
+    subCategoryObj.save((err, data) => {
       if (err) {
         console.log("category ERROR", err);
         return res.status(400).json({ msg: "BED REQUEST", error: err });
@@ -19,15 +20,41 @@ const addProduct = (req, res) => {
       }
     });
   } catch (err) {
-    console.log("error from catch block", error);
-    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
+    console.log("error from catch block", err);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
   }
 };
 
-const getFilteredProducts = (req, res) => {
+const likeReview = (req, res) => {
+  try {
+    let page = req.query.pageNo - 1;
+    let limit = req.query.limit;
+    let skip = page * limit;
+    subCategoryModel
+      .find()
+      .populate("catId")
+      .limit(limit)
+      .skip(skip)
+      .exec((err, data) => {
+        if (err) {
+          return res.status(500).json({ msg: "FAILED", error: err });
+        }
+        res
+          .status(200)
+          .json({ msg: "SUCCESS", total: data.length, data: data });
+      });
+  } catch (err) {
+    console.log("error from catch block", err);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
+  }
+};
+
+//------------------------------------------sohail
+
+const updateExistingReview = (req, res) => {
   try {
     let { catId } = req.params;
-    categoryModel.findByIdAndRemove(catId, (err, data) => {
+    subCategoryModel.findByIdAndRemove(catId, (err, data) => {
       if (err) {
         console.log("category ERROR", err);
         return res.status(400).json({ msg: "BED REQUEST", error: err });
@@ -42,11 +69,11 @@ const getFilteredProducts = (req, res) => {
   }
 };
 
-const updateProduct = (req, res) => {
+const addNewReviewForProduct = (req, res) => {
   try {
     let { catId } = req.params;
     let { catName, catNumber } = req.body;
-    categoryModel.findByIdAndUpdate(
+    subCategoryModel.findByIdAndUpdate(
       catId,
       { catName, catNumber },
       (err, data) => {
@@ -65,27 +92,7 @@ const updateProduct = (req, res) => {
   }
 };
 
-const removeProductById = (req, res) => {
-  try {
-    page = req.params.page || 0;
-    limit = req.params.limit || 10;
-    categoryModel
-      .find()
-      .skip(page * limit)
-      .limit(pageOptions.limit)
-      .exec(function (err, data) {
-        if (err) {
-          return res.status(500).json({ msg: "FAILED", error: err });
-        }
-        res.status(200).json({ msg: "SUCCESS", data: data });
-      });
-  } catch (err) {
-    console.log("error from catch block", error);
-    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
-  }
-};
-
-const changeProductStatus = (req, res) => {
+const replyOfReview = (req, res) => {
   try {
     let { catId } = req.params;
     categoryModel.findById(catId, (err, data) => {
@@ -103,7 +110,7 @@ const changeProductStatus = (req, res) => {
   }
 };
 
-const productCountWithFilter = (req, res) => {
+const deleteManyReviews = (req, res) => {
   try {
     let { catId, status } = req.params;
     categoryModel.findByIdAndUpdate(catId, { status }, (err, data) => {
@@ -123,27 +130,7 @@ const productCountWithFilter = (req, res) => {
   }
 };
 
-const uploadProductImage = (req, res) => {
-  try {
-    let { catId, status } = req.params;
-    categoryModel.findByIdAndUpdate(catId, { status }, (err, data) => {
-      if (err) {
-        console.log("category ERROR", err);
-        return res.status(400).json({ msg: "BED REQUEST", error: err });
-      } else {
-        console.log("category STATUS UPDATE by id", data);
-        return res
-          .status(200)
-          .json({ msg: "CATEGORY STATUS UPDATED", data: data });
-      }
-    });
-  } catch (err) {
-    console.log("error from catch block", error);
-    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
-  }
-};
-
-const changeMultipleProductStatus = (req, res) => {
+const deleteReview = (req, res) => {
   try {
     let { catId, status } = req.params;
     categoryModel.findByIdAndUpdate(catId, { status }, (err, data) => {
@@ -164,12 +151,11 @@ const changeMultipleProductStatus = (req, res) => {
 };
 
 module.exports = {
-  addProduct,
-  getFilteredProducts,
-  updateProduct,
-  removeProductById,
-  changeProductStatus,
-  productCountWithFilter,
-  uploadProductImage,
-  changeMultipleProductStatus,
+    addNewReviewForSaller,
+    addNewReviewForProduct,
+    likeReview,
+    updateExistingReview,
+    replyOfReview,
+    deleteReview,
+    deleteManyReviews
 };

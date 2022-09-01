@@ -12,16 +12,6 @@ const {
   forgetPassword,
 } = require("../controller/user-controller");
 
-const {
-  getUserListPagination,
-  updateUserDetailsById,
-  updateManyUsersStatus,
-  registerUser,
-  deleteUsers,
-  getUserDetailsByUserId,
-  userNameEmailExist,
-  forgetPassword,
-} = require("../controller/user-controller");
 
 const {otpSend, verifyOtp} = require("../helpers/otp-helper")
 
@@ -68,4 +58,8 @@ router.post("/send-otp",otpSend)
 //verify api for update password
 router.post("/forget-password",verifyOtp, forgetPassword)
 
+
+router.get("/", (req, res) => {
+  res.status(200).send("user api working");
+});
 module.exports = router;
