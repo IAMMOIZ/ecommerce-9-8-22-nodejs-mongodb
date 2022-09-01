@@ -1,4 +1,4 @@
-const countryModel = require("../model/country.model")
+const countryModel = require("../model/country-model")
 
 addCountry = (req,res)=>{
 const {countryName,countryCode,dateCreated,dateUpdated,status} = req.body;
