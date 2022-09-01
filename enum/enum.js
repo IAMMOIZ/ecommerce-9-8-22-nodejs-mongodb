@@ -32,10 +32,6 @@ const CommonStatus = {
   TEMP_DISABLED: "TEMP_DISABLED",
   WAIT_FOR_APPROVAL: "WAIT_FOR_APPROVAL",
 };
-const ReviewForEnum = {
-  SALLER:"SALLER",
-  PRODUCT:"PRODUCT"
-};
 
 const ImageType = {
   THUMBNAIL: "THUMBNAIL",
@@ -53,15 +49,6 @@ const AvailablityStatus = {
   WAIT_FOR_APPROVAL: "WAIT_FOR_APPROVAL",
 };
 
-const OrderStatus = {
-  PLACED : "PLACED",
-  CANCEL : "CANCEL" ,
-  REFUNDED : "REFUNDED",
-  DELIVERED : "DELIVERED" ,
-  ATSTORE : "ATSTORE",
-  ATDELIVERYSTORE : "ATDELIVERYSTORE",
-  NONE : "NONE"
-}
 module.exports = {
   Gender,
   SubscriptionType,
@@ -70,6 +57,5 @@ module.exports = {
   CommonStatus,
   ImageType,
   AvailablityStatus,
-  OrderStatus
 };
 

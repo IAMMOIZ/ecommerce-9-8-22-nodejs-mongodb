@@ -42,6 +42,10 @@ router.post("/add-address", addNewAddress);
 */
 router.post("/", (req, res) => {
   res.status(200).json({ status : 200 , msg : "address api is working" , data : { city : "ujjain" , state : "madhya pradesh"} , arr : [ {   name : "moiz"} , { name : "swagger"} ] });
+})
+router.get("/", (req, res) => {
+  res.status(200).send("user api working");
+
 });
 
-module.exports = router;
+module.exports = router

@@ -99,4 +99,4 @@ stateStatus = (req,res)=>{
     })
 }
  
-module.exports = {deleteStates , addState,getAllStateByPagination,getStateDetailsById,deleteStateById,updateStatebyId,stateStatus}
+module.exports = { addState,getAllStateByPagination,getStateDetailsById,deleteStateById,updateStatebyId,stateStatus}
