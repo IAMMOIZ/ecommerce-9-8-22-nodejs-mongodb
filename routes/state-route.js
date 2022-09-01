@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const {deleteStates , addState,getAllStateByPagination,getStateDetailsById,deleteStateById,deleteStates,updateStatebyId,stateStatus} = require("../controller/state-controller")
+const {deleteStates , addState,getAllStateByPagination,getStateDetailsById,deleteStateById,updateStatebyId,stateStatus} = require("../controller/state-controller")
 
 router.post("/add-state",addState)
 

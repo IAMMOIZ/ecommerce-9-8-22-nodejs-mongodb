@@ -27,7 +27,7 @@ let orderSchema = new mongoose.Schema({
         ref : "Users"
     },
     orderStatus : [{
-        status : { type : string , enum : OrderStatus  , default : OrderStatus.NONE }
+        status : { type : String , enum : OrderStatus  , default : OrderStatus.NONE }
     }],
     isCancelled : { type : Boolean },
     deliveryBody :  {

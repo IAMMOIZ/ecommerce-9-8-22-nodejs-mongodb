@@ -12,16 +12,6 @@ const {
   forgetPassword,
 } = require("../controller/user-controller");
 
-const {
-  getUserListPagination,
-  updateUserDetailsById,
-  updateManyUsersStatus,
-  registerUser,
-  deleteUsers,
-  getUserDetailsByUserId,
-  userNameEmailExist,
-  forgetPassword,
-} = require("../controller/user-controller");
 
 const {otpSend, verifyOtp} = require("../helpers/otp-helper")
 
