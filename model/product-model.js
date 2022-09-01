@@ -30,14 +30,9 @@ const ProductSchema = new mongoose.Schema(
       enums: AvailablityStatus,
       default: AvailablityStatus.NONE,
     }, //cronejob on every order or batch job
-    review : [
-      { 
-        reviewId : {  type: mongoose.Schema.Types.ObjectId, ref: "Reviews" },
-        date : { type : Date , default : Date.now() }
-     }],//for joins of review collection
-  
     // manufacturer    : {  },
-    },
+    // review : {  },//for joins of review collection
+  },
   {
     timestamps: true,
   }

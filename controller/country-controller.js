@@ -1,3 +1,5 @@
+const { json } = require("express");
+const express = require("express")
 const countryModel = require("../model/country.model")
 
 addCountry = (req,res)=>{
@@ -40,15 +42,6 @@ getCountryDetailsById = (req , res )=>{
         }
         console.log("data",data);
         return res.status(201).json({result:data, msg:" country"})
-    })
-}
-deleteCountry = (req ,res)=>{
-    let countryId = req.params.id;
-
-    countryModel.findOneAndDelete({_id : countryId}).then((data)=>{
-        return res.status(200).json({result : data , msg : "country deleted"})
-    }).catch((err)=>{
-        return res.status(400).json({error : err , msg : "found an error to delete"})
     })
 }
 

@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+
+
 const PaymentMethodSchema = new mongoose.Schema({
   methodName: { type: String },
   isActive: { type: Boolean },

@@ -28,7 +28,7 @@ router.post("/product-status-multi", changeMultipleProductStatus);
 // router.post("/product-image",   )
 //dummy apis
 router.get("/", (req, res) => {
-  res.status(200).send("product api working");
+  res.status(200).send("subcategory api working");
 });
 
 module.exports = router;
