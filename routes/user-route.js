@@ -58,8 +58,4 @@ router.post("/send-otp",otpSend)
 //verify api for update password
 router.post("/forget-password",verifyOtp, forgetPassword)
 
-
-router.get("/", (req, res) => {
-  res.status(200).send("user api working");
-});
 module.exports = router;

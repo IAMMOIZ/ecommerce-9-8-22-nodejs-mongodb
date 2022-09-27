@@ -3,9 +3,9 @@ const subCategoryModel = require("../model/sub-category.model.js");
 
 const addNewSubCategory = (req, res) => {
   try {
-    let { catId, subCatName, subCatNumber } = req.body;
+    let { subCatId, subCatName, subCatNumber } = req.body;
     let subCategoryObj = new subCategoryModel({
-      catId,
+      subCatId,
       subCatName,
       subCatNumber,
       status: CommonStatus.WAIT_FOR_APPROVAL,

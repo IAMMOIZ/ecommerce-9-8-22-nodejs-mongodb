@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+s
 const verifyPassword = (req, res, next) => {
   bcrypt.compare(body.password, user.password, (data, error) => {
     if (err) {
@@ -8,3 +9,6 @@ const verifyPassword = (req, res, next) => {
     }
   });
 };
+
+
+module.exports = verifyPassword
