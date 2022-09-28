@@ -1,6 +1,5 @@
-const categoryModel = require("../model//category-model");
+const categoryModel = require("../model/category-model");
 
-const subCategoryModel = require("../model/sub-category.model.js")
 const { CommonStatus } = require("../enum/enum");
 
 //add new category
