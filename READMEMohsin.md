@@ -63,3 +63,6 @@ payment method --
 //next product , cart , order , invoice , trackingorder
 
 //csrf , cors , auth , passport
+
+
+//27-09-2022 have to create cart , city , order , review route and controller and change the controller logic  in payment methode  , product controller 
