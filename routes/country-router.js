@@ -2,16 +2,16 @@ const express = require("express")
 const router = express.Router()
 const {addCountry,getAllCountryByPagination,getCountryDetailsById,deletecountryById,updateCountrybyId,countryStatus} = require("../controller/country-controller")
 
-router.post("/addCountry",addCountry)
+router.post("/register-country",addCountry)
 
-router.get("/get-AllCountry",getAllCountryByPagination)
+router.get("/get-country-list",getAllCountryByPagination)
 
-router.get("/get-Country-ById/:id",getCountryDetailsById)
+router.get("/get-country-byId/:id",getCountryDetailsById)
 
-router.delete("/delete-country-ById/:id",deletecountryById)
+router.delete("/delete-country-byId/:id",deletecountryById)
 
-router.patch("/update-Country-byId/:id",updateCountrybyId)
+router.patch("/update-country-byId/:id",updateCountrybyId)
 
-router.patch("/country-Status/:id",countryStatus)
+router.patch("/country-status/:id",countryStatus)
 
 module.exports = router
