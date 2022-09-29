@@ -1,8 +1,7 @@
 const countryModel = require("../model/country-model")
 
 addCountry = (req,res)=>{
-const {countryName,countryCode,dateCreated,dateUpdated,status} = req.body;
-
+let {countryName,countryCode,dateCreated,dateUpdated,status} = req.body;
 const country = new countryModel({countryName,countryCode,dateCreated,dateUpdated,status})
 
 country.save((err,data)=>{
@@ -40,15 +39,6 @@ getCountryDetailsById = (req , res )=>{
         }
         console.log("data",data);
         return res.status(201).json({result:data, msg:" country"})
-    })
-}
-deleteCountry = (req ,res)=>{
-    let countryId = req.params.id;
-
-    countryModel.findOneAndDelete({_id : countryId}).then((data)=>{
-        return res.status(200).json({result : data , msg : "country deleted"})
-    }).catch((err)=>{
-        return res.status(400).json({error : err , msg : "found an error to delete"})
     })
 }
 

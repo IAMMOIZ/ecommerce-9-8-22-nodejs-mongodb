@@ -50,7 +50,9 @@ const otpSend = async (req, res, next) => {
       msg: "Please check your mail - OTP sent",
     });
   } else {
-    console.log("Email is not exist ");
+    res.status(400).json({
+      msg: "Email not Exist",
+    })
   }
 };
 

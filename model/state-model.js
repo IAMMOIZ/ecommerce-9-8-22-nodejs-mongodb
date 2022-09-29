@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const stateSchema = new mongoose.Schema({
-  //userId :{type:mongoose.Schema.Types.ObjectId, ref:"User"},
+  countryId :{type:mongoose.Schema.Types.ObjectId, ref:"country"},
   stateName: { type: String, require: true },
-  stateCode: { type: Number },
-  stateCreated: { type: Date, default: Date.now() },
+  stateCode: { type: Number , unique : true },
+  dateCreated: { type: Date, default: Date.now() },
   dateUpdated: { type: Date, default: Date.now() },
   status: {
     type: String,
@@ -14,9 +14,9 @@ const stateSchema = new mongoose.Schema({
   //updatedBy : { type: mongoose.Schema.Types.ObjectId , ref : 'User' }
 });
 
-let countryModel = mongoose.model("state", stateSchema);
+let stateModel = mongoose.model("state", stateSchema);
 
-module.exports = countryModel;
+module.exports = stateModel;
 
 // country {countryName string, status [enm ( active , block , temprary block)],countrycode number , createdate date , updatedate date , \-updatedby :{userid} -\}
 // opration of apis {  addcountry(post , body) , getallcountrypaginationsearch(post , body) , getcountrydetailsbyid(params me countryid ), deletecountrybyid(params me countryid ) ,  updatecountrybyid(params me countryid , body me update data of country ,patch ) , diactivatecountry()}
