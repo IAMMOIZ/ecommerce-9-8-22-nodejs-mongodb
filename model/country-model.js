@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const countrySchema = new mongoose.Schema({
   //userId :{type:mongoose.Schema.Types.ObjectId, ref:"User"},
-  countryName: { type: String, require: true },
-  countryCode: { type: Number },
+  countryName: { type: String, require: true ,  unique : true},
+  countryCode: { type: Number , require: true , unique : true },
   dateCreated: { type: Date, default: Date.now() },
   dateUpdated: { type: Date, default: Date.now() },
   status: {

@@ -1,9 +1,9 @@
-const countryModel = require("../model/state-model")
+const stateModel = require("../model/state-model")
 
 addState = (req,res)=>{
-const {countryName,countryCode,dateCreated,dateUpdated,status} = req.body;
+const {countryId,stateName,stateCode,dateCreated,dateUpdated,status} = req.body;
 
-const country = new countryModel({countryName,countryCode,dateCreated,dateUpdated,status})
+const country = new stateModel({countryId,stateName,stateCode,dateCreated,dateUpdated,status})
 
 country.save((err,data)=>{
     if(err){
@@ -20,9 +20,9 @@ getAllStateByPagination = (req,res)=>{
     let page = req.query.page-1
     let limit = req.query.limit
     let skip = page*limit
-    countryModel.find().limit(limit).skip(skip).then(
+    stateModel.find().limit(limit).skip(skip).then(
         (data)=>{
-            return res.status(200).json({result : data ,msg : "all country"})
+            return res.status(200).json({result : data ,msg : "all state"})
         }
     ).catch((err)=>{
         return res.status(400).json({error : err , msg : "data not found"})
@@ -31,9 +31,9 @@ getAllStateByPagination = (req,res)=>{
 
 
 getStateDetailsById = (req , res )=>{
-     let countryId = req.params.id;
-    console.log("params",countryId)
-     countryModel.findById(countryId , ( err,data)=>{
+     let stateId = req.params.id;
+    console.log("params",stateId)
+     stateModel.findById(stateId , ( err,data)=>{
         if(err){
             console.log("err",err)      
             return res.status(400).json({error:err, msg:"data not found"})
@@ -44,34 +44,34 @@ getStateDetailsById = (req , res )=>{
 }
 
 deleteStateById = (req ,res)=>{
-    let countryId = req.params.id;
+    let stateId = req.params.id;
 
-    countryModel.findOneAndDelete({_id : countryId}).then((data)=>{
-        return res.status(200).json({result : data , msg : "country deleted"})
+    stateModel.findOneAndDelete({_id : stateId}).then((data)=>{
+        return res.status(200).json({result : data , msg : "state deleted"})
     }).catch((err)=>{
         return res.status(400).json({error : err , msg : "found an error to delete"})
     })
 }
 
 deleteStates = (req ,res)=>{
-    let countryId = req.params.id;
+    let stateId = req.params.id;
 
-    countryModel.findOneAndDelete({_id : countryId}).then((data)=>{
-        return res.status(200).json({result : data , msg : "country deleted"})
+    stateModel.findOneAndDelete({_id : stateId}).then((data)=>{
+        return res.status(200).json({result : data , msg : "state deleted"})
     }).catch((err)=>{
         return res.status(400).json({error : err , msg : "found an error to delete"})
     })
 }
 
 updateStatebyId = (req , res)=>{
-    let id = req.params.id;
+    let stateId = req.params.id;
 
-    let countryName = req.body.countryName;
-    let countryCode = req.body.countryCode;
+    let stateName = req.body.stateName;
+    let stateCode = req.body.stateCode;
 
-    let updatedData = {countryName:countryName,countryCode:countryCode}
+    let updatedData = {stateName:stateName,stateCode:stateCode}
 
-    countryModel.findByIdAndUpdate(id,
+    stateModel.findByIdAndUpdate(stateId,
         updatedData,(err,data)=>{
         if(err){
             return res.status(400).json({error:err,msg:"not updated"})
@@ -83,15 +83,15 @@ updateStatebyId = (req , res)=>{
 }
 
 stateStatus = (req,res)=>{
-    let id = req.params.id;
+    let stateId = req.params.id;
 
-    let countrystatus = req.query.status;
+    let statestatus = req.query.status;
 
-    let updateddata = {status:countrystatus}
+    let updateddata = {status:statestatus}
 
-    countryModel.findByIdAndUpdate(id , updateddata ,(err,data)=>{
+    stateModel.findByIdAndUpdate(stateId , updateddata ,(err,data)=>{
         if(err){
-            return res.status(400).json({error:err,msg:"not updated"})
+            return res.status(400).json({error:err,msg:"state not updated"})
         }else{
             return res.status(200).json({result:data,msg:"data updated"})
         }
