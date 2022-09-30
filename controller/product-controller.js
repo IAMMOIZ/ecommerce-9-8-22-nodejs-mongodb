@@ -2,22 +2,40 @@
 
 const { CommonStatus } = require("../enum/enum");
 
+const productModel = require ('../model/product-model')
+
 
 const addProduct = (req, res) => {
   try {
-    let { catName, catNumber } = req.body;
-    let categoryObj = new categoryModel({
-      catName,
-      catNumber,
+    let { productName, productDescription,productPrice  ,  productCode, productQty , sallerId , categoryId , subCategoryId , brandId , avilablityStatus } = req.body;
+    let productObj = new productModel({
+      productName,
+      productDescription,
+      productPrice : {
+        basePrice: { type: Number, required: true },
+        salePrice: { type: Number, required: true },
+        costPrice: { type: Number, required: true },
+      },
+      productCode,
+      productQty : {
+        availableQty: { type: Number, required: true, min: 0 },
+        totalQty: { type: Number, required: true, min: 0 },
+      },
+      sallerId,
+      categoryId,
+      subCategoryId,
+      brandId,
+      avilablityStatus,
       status: CommonStatus.WAIT_FOR_APPROVAL,
     });
-    categoryObj.save((err, data) => {
+
+    productObj.save((err, data) => {
       if (err) {
         console.log("category ERROR", err);
         return res.status(400).json({ msg: "BED REQUEST", error: err });
       } else {
         console.log("category added data", data);
-        return res.status(201).json({ msg: "CATEGORY ADDED", data: data });
+        return res.status(201).json({ msg: "PRODUCT ADDED", data: data });
       }
     });
   } catch (err) {

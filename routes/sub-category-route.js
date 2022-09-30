@@ -7,16 +7,16 @@ const {
   updateSubCategory,
   getSubCategoryById,
   changeSubCategoryStatus,
-  getSubCategoryCount,
+  getSubCategoryCountByCatId,
 } = require("../controller/subcategory-controller");
 
-router.post("/add-subcategory", addNewSubCategory);
-router.post("/getAll-subcategory", getAllsubCategory);
+router.post("/register-subcategory", addNewSubCategory);
+router.get("/getAll-subcategory", getAllsubCategory);
+router.get("/get-subcategory/:id", getSubCategoryById);
 router.delete("/remove-subcategory/:id", removeSubCategoryById);
 router.put("/update-subcategory/:id", updateSubCategory);
-router.post("/get-subcategory/:id", getSubCategoryById);
 router.patch("/subcategory-status/:id", changeSubCategoryStatus);
-router.post("/subcategory-count", getSubCategoryCount);
+router.get("/subcategory-count", getSubCategoryCountByCatId);
 
 router.get("/", (req, res) => {
   res.status(200).send("subcategory api working");

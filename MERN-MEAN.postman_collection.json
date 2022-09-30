@@ -1,0 +1,1029 @@
+{
+	"info": {
+		"_postman_id": "50efdf6d-6f03-4c86-bdb4-545bd47cf7f1",
+		"name": "MERN-MEAN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20469829"
+	},
+	"item": [
+		{
+			"name": "user apis",
+			"item": [
+				{
+					"name": "add a user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"mohsin\",\r\n    \"lastName\":\"ansari\",\r\n    \"userName\":\"mahi\",\r\n    \"email\":\"amitjadhav2608@gmail.com\",\r\n    \"password\":\"abc\",\r\n    \"gender\":\"MALE\",\r\n    \"activeStatus\":\"WAIT_FOR_APPROVAL\",\r\n    \"userRole\" : \"USER\",\r\n    \"subscriptionType\":\"NORMAL\",\r\n    \"profileImage\" : \"asdfadsfdsaf\",\r\n    \"dateOfBirth\" : \"12-10-1996\",\r\n    \"mobile\" : [{ \"countryCode\" : 91, \"number\" : 9898989898 , \"isPrimary\" :  true }],\r\n        \"address\": {\r\n        \"permanentAddress\": {\r\n            \"houseNo\" : 376561,\r\n            \"street\" : 234534,\r\n            \"addressLine1\" : \"bet34gsdggumpura\",\r\n            \"addressLine2\" : \"fakeerpusdfgfsra\",\r\n            \"city\" : \"ujjasfdgin\",\r\n            \"state\" : \"madhyapsdfgsradesh\",\r\n            \"pincode\" : 4560051,\r\n            \"country\" : \"amit\",\r\n            \"addressType\" : \"PERMANENT\"\r\n        },\r\n        \"currentAddress\": {\r\n            \"houseNo\" : 376561,\r\n            \"street\" : 234534,\r\n            \"addressLine1\" : \"bet34gsdggumpura\",\r\n            \"addressLine2\" : \"fakeerpusdfgfsra\",\r\n            \"city\" : \"ujjasfdgin\",\r\n            \"state\" : \"madhyapsdfgsradesh\",\r\n            \"pincode\" : 4560051,\r\n            \"country\" : \"amit\",\r\n            \"addressType\" : \"CURRENT\"\r\n        },\r\n        \"shippingAddress\": {\r\n            \"houseNo\" : 376561,\r\n            \"street\" : 234534,\r\n            \"addressLine1\" : \"bet34gsdggumpura\",\r\n            \"addressLine2\" : \"fakeerpusdfgfsra\",\r\n            \"city\" : \"ujjasfdgin\",\r\n            \"state\" : \"madhyapsdfgsradesh\",\r\n            \"pincode\" : 4560051,\r\n            \"country\" : \"amit\",\r\n            \"addressType\" : \"SHIPPING\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/user/register-user",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"register-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all user with paggination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/get-user-list-paggination?pageNo=1&limit=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"get-user-list-paggination"
+							],
+							"query": [
+								{
+									"key": "pageNo",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user details by id with populate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/user-detail/62fb4d0e5ec06c8e2e2306ed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"user-detail",
+								"62fb4d0e5ec06c8e2e2306ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete single or multiple user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\r\n    [\"62fb4c895ec06c8e2e2306d2\", \r\n    \"62fb4d285ec06c8e2e2306ff\", \r\n    \"62fb4d1b5ec06c8e2e2306f6\"] \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user//delete-users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"",
+								"delete-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update multiple users status Copy",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\r\n    [\"62fb4cf45ec06c8e2e2306db\", \r\n    \"62fb4d015ec06c8e2e2306e4\", \r\n    \"62fb4d0e5ec06c8e2e2306ed\"],\r\n    \"status\" : \"ACTIVE\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/user/status-user",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"status-user"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check existing username or email Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\" : \"\",\r\n    \"email\" : \"aa@gmDail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/user/check-user",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"check-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send otp for forget password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"amitjadhav2608@gail.com\",\r\n    \"password\" : \"1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/send-otp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"send-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify otp and update password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"amitjadhav2608@gmail.com\",\r\n    \"otp\": 2243,\r\n    \"password\" : \"1234590\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/forget-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"forget-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "category apis",
+			"item": [
+				{
+					"name": "register a category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"catName\" : \"electronics\" ,\r\n    \"catCode\" : 2005\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/category/register-category",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"register-category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all categories count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/category/category-count",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"category-count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all category  list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/category/get-category-list?page&limit",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"get-category-list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": null
+								},
+								{
+									"key": "limit",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete category by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/category//remove-category/63358cfea799d40fb480ffa6",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"",
+								"remove-category",
+								"63358cfea799d40fb480ffa6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"catName\" : \"home appliance\",\r\n    \"catCode\" : 2001\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/category/update-category/63358d07a799d40fb480ffa8",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"update-category",
+								"63358d07a799d40fb480ffa8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get category by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/category/get-category/63358d07a799d40fb480ffa8",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"get-category",
+								"63358d07a799d40fb480ffa8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update category status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/category/category-status/:id/:status",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"category-status",
+								":id",
+								":status"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "63358d07a799d40fb480ffa8"
+								},
+								{
+									"key": "status",
+									"value": "ACTIVE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category aggrigation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/category/category-aggregate?status=ACTIVE",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"category-aggregate"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "ACTIVE"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sub-category apis",
+			"item": [
+				{
+					"name": "register a sub category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"catId\" : \"63358d19a799d40fb480ffaa\" , \r\n    \"subCatName\" : \"TV\",\r\n    \"subCatNumber\" : 202\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/sub-category/register-subcategory",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"sub-category",
+								"register-subcategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get subcatory list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/sub-category/getAll-subcategory?page&limit",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"sub-category",
+								"getAll-subcategory"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": null
+								},
+								{
+									"key": "limit",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get sub-category by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/sub-category/get-subcategory/6335985100a87200db165e0f",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"sub-category",
+								"get-subcategory",
+								"6335985100a87200db165e0f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update sub-category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subCatName\" : \"radio\",\r\n    \"subCatNumber\" : 206\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/sub-category/update-subcategory/6335985100a87200db165e0f",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"sub-category",
+								"update-subcategory",
+								"6335985100a87200db165e0f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update subcategory status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/sub-category/subcategory-status/6335985100a87200db165e0f?status=ACTIVATE",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"sub-category",
+								"subcategory-status",
+								"6335985100a87200db165e0f"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "ACTIVATE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get sub-category count by category id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/sub-category/subcategory-count?catId=63358d07a799d40fb480ffa8",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"sub-category",
+								"subcategory-count"
+							],
+							"query": [
+								{
+									"key": "catId",
+									"value": "63358d07a799d40fb480ffa8"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "brand apis",
+			"item": [
+				{
+					"name": "register brand",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"catId\" : \"63358d07a799d40fb480ffa8\",\r\n    \"subCatId\" : \"633595054faa6020e0634438\",\r\n    \"brandName\" : \"mi\",\r\n    \"brandNumber\" : 16\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/brand/register-brand",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"brand",
+								"register-brand"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get brand list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/brand//getAll-brand?page&limit",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"brand",
+								"",
+								"getAll-brand"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": null
+								},
+								{
+									"key": "limit",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get brand by  id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/brand/get-brand/6335a9cef2d4f49fe9040d12",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"brand",
+								"get-brand",
+								"6335a9cef2d4f49fe9040d12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change brand status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/brand/brand-status/6335a9cef2d4f49fe9040d12?status=ACTIVE",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"brand",
+								"brand-status",
+								"6335a9cef2d4f49fe9040d12"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "ACTIVE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update brand by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"brandName\" : \"iphone\",\r\n    \"brandNumber\" : \"19\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/brand/update-brand/6335a9cef2d4f49fe9040d12",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"brand",
+								"update-brand",
+								"6335a9cef2d4f49fe9040d12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "brand count by cat id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/brand/brand-count?catId=63358d07a799d40fb480ffa8",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"brand",
+								"brand-count"
+							],
+							"query": [
+								{
+									"key": "catId",
+									"value": "63358d07a799d40fb480ffa8"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment-method apis",
+			"item": []
+		},
+		{
+			"name": "product apis",
+			"item": []
+		},
+		{
+			"name": "address apis",
+			"item": [
+				{
+					"name": "add new address sapratly",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "localhost:3000/address/add-address",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"address",
+								"add-address"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "state apis",
+			"item": [
+				{
+					"name": "register a state",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"countryId\" : \"6335493b426f816eac784dc3\",\r\n    \"stateName\" : \"madhya-pradesh\",\r\n    \"stateCode\" : 456\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/state//register-state",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"state",
+								"",
+								"register-state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all state",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/state/get-state-list?page&limit",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"state",
+								"get-state-list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": null
+								},
+								{
+									"key": "limit",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get state by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/state/get-state-byId/63354982426f816eac784dc5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"state",
+								"get-state-byId",
+								"63354982426f816eac784dc5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete state by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/state/delete-state-byId/63354982426f816eac784dc5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"state",
+								"delete-state-byId",
+								"63354982426f816eac784dc5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update state",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stateName\" : \"delhi\",\r\n    \"stateCode\" : 678\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/state/update-state-byId/63354982426f816eac784dc5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"state",
+								"update-state-byId",
+								"63354982426f816eac784dc5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update state  status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/state/state-status/63354982426f816eac784dc5?status=diactive",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"state",
+								"state-status",
+								"63354982426f816eac784dc5"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "diactive"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "country apis",
+			"item": [
+				{
+					"name": "register a country",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"countryName\" : \"Pakistan\",\r\n    \"countryCode\" : 901\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/country/register-country",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"country",
+								"register-country"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product apis",
+			"item": [
+				{
+					"name": "register product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productName\" : \"abc\",\r\n      \"productDescription\": \"health product\",\r\n      \"productPrice\" : {\r\n        \"basePrice\": 8989,\r\n        \"salePrice\": 7999,\r\n        \"costPrice\": 6983\r\n      },\r\n      \"productCode\" : 56789,\r\n      \"productQty\" : {\r\n        \"availableQty\": 89,\r\n        \"totalQty\": 99\r\n      },\r\n      \"sallerId\" : \"\",\r\n      \"categoryId\" : \"\",\r\n      \"subCategoryId\" : \"\",\r\n      \"brandId\": \"\",\r\n      \"avilablityStatus\" : \"\",\r\n      \"status\": \"WAIT_FOR_APPROVAL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

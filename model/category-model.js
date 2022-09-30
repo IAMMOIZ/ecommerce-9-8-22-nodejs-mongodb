@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const CategorySchema = new mongoose.Schema(
   {
     catName: { type: String, required: true },
-    catNumber: { type: String, required: true, unique: true },
+    catCode : { type: String, required: true, unique: true },
     status: {
       type: String,
       enum: CommonStatus,
@@ -17,3 +17,4 @@ const CategorySchema = new mongoose.Schema(
   }
 );
 module.exports = mongoose.model("Category", CategorySchema);
+ 
