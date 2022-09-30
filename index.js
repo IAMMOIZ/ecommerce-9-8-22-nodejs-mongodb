@@ -58,7 +58,7 @@ app.use("/paymentmethod" , paymentMethodRoutes )
 app.use("/product" , productRoute )
 app.use("/review" , reviewRoutes )
 app.use("/state" , stateRoutes )
-app.use("/subcategory" , subCategoryRoutes )
+app.use("/sub-category" , subCategoryRoutes )
 app.use("/user" , userRoutes )
 /**
   * @swagger

@@ -3,9 +3,9 @@ const subCategoryModel = require("../model/sub-category-model.js");
 
 const addNewSubCategory = (req, res) => {
   try {
-    let { subCatId, subCatName, subCatNumber } = req.body;
+    let { catId, subCatName, subCatNumber } = req.body;
     let subCategoryObj = new subCategoryModel({
-      subCatId,
+      catId,
       subCatName,
       subCatNumber,
       status: CommonStatus.WAIT_FOR_APPROVAL,
@@ -27,11 +27,11 @@ const addNewSubCategory = (req, res) => {
 
 const getAllsubCategory = (req, res) => {
   try {
+    console.log('hiihih')
     let page = req.query.pageNo - 1;
     let limit = req.query.limit;
     let skip = page * limit;
-    subCategoryModel
-      .find()
+     subCategoryModel.find()
       .populate("catId")
       .limit(limit)
       .skip(skip)
@@ -135,16 +135,18 @@ const changeSubCategoryStatus = (req, res) => {
 };
 
 //get all subcategory count
-const getSubCategoryCount = (req, res) => {
+const getSubCategoryCountByCatId = (req, res) => {
   try {
     
-    subCategoryModel.count((err, data) => {
+    let {catId }= req.params
+
+    subCategoryModel.find(catId , (err, data) => {
       if (err) {
         console.log("category ERROR", err);
         return res.status(400).json({ msg: "BED REQUEST", error: err });
       } else {
         console.log("find subcategories", data);
-        return res.status(200).json({ msg: "SUCCESS", total_Documents: data });
+        return res.status(200).json({ msg: "all sub-category from category", total_Documents: data });
       }
     });
   } catch (err) {
@@ -160,5 +162,5 @@ module.exports = {
   updateSubCategory,
   getSubCategoryById,
   changeSubCategoryStatus,
-  getSubCategoryCount,
+  getSubCategoryCountByCatId,
 };

@@ -7,7 +7,7 @@ const SubCategorySchema = new mongoose.Schema(
       ref: "Category",
       required: [true, "Category Id is required"],
     },
-    parentCategory: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
+    // parentCategory: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
     subCatName: { type: String, required: true },
     subCatNumber: { type: Number, required: true, unique: true },
     status: {
