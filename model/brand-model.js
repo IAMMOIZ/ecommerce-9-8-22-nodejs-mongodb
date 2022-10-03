@@ -11,8 +11,8 @@ const BrandSchema = new mongoose.Schema(
       enum: CommonStatus,
       default: CommonStatus.WAIT_FOR_APPROVAL,
     },
-    parentCategory: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
-    parentSubCategory: [
+    parentCategory : { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
+    parentSubCategory : [
       { type: mongoose.Schema.Types.ObjectId, ref: "SubCategory" },
     ],
   },

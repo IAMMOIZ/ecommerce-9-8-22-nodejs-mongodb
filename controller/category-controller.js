@@ -5,10 +5,10 @@ const { CommonStatus } = require("../enum/enum");
 //add new category
 const addNewCategory = (req, res) => {
   try {
-    let { catName, catNumber } = req.body;
+    let { catName, catCode } = req.body;
     let categoryObj = new categoryModel({
       catName,
-      catNumber,
+      catCode,
       status: CommonStatus.WAIT_FOR_APPROVAL,
     });
     categoryObj.save((err, data) => {
@@ -71,7 +71,7 @@ const getAllCategory = (req, res) => {
     return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
   }
 };
-
+ 
 //remove category id
 const removeCategoryById = (req, res) => {
   try {
@@ -170,8 +170,8 @@ const changeCategoryStatus = (req, res) => {
 
 const getAllCountsAggregate = (req, res) => {
   try {
-    // let catId = req.params.id;
-    categoryModel.aggregate([{ $match: { status: "DEACTIVE" } }, { $count: "totals" }], (err, data) => {
+    let categoryStatus = req.query.status
+    categoryModel.aggregate([{ $match: { status: categoryStatus } }, { $count: "totals" }], (err, data) => {
       if (err) {
         console.log("category ERROR", err);
         return res.status(400).json({ msg: "BED REQUEST", error: err });

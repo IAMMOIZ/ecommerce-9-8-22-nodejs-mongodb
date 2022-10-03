@@ -2,23 +2,23 @@ const express = require("express");
 const router = express.Router();
 const {
   addNewBrand,
-  getAllBrandbyPagination,
+  getAllBrand,
   removeBrandById,
   updateBrand,
-
   getBrandById,
   changeBrandStatus,
-  brandCount,
+  brandCountByCatId,
 } = require("../controller/brand-controller");
 
-router.post("/add-brand", addNewBrand);
-router.post("/getAll-brand", getAllBrandbyPagination);
+router.post("/register-brand", addNewBrand);
+router.get("/getAll-brand", getAllBrand);
+router.get("/get-brand/:id",  getBrandById )
 router.delete("/remove-brand/:id",  removeBrandById )
 router.put("/update-brand/:id",  updateBrand )
-router.post("/get-brand/:id",  getBrandById )
+
 router.patch("/brand-status/:id",  changeBrandStatus )
 
-router.post("/brand-count",  brandCount )
+router.get("/brand-count",  brandCountByCatId )
 
 
 router.get("/", (req, res) => {

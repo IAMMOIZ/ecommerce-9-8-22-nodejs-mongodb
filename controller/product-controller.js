@@ -2,22 +2,40 @@
 
 const { CommonStatus } = require("../enum/enum");
 
+const productModel = require ('../model/product-model')
+ 
 
 const addProduct = (req, res) => {
   try {
-    let { catName, catNumber } = req.body;
-    let categoryObj = new categoryModel({
-      catName,
-      catNumber,
+    let { productName, productDescription, productPrice ,  productCode, productQty , sallerId , categoryId , subCategoryId , brandId , avilablityStatus } = req.body;
+    let productObj = new productModel({
+      productName,
+      productDescription,
+      productPrice : {
+        basePrice: productPrice.basePrice,
+        salePrice: productPrice.salePrice,
+        costPrice: productPrice.costPrice,
+      },
+      productCode,
+      productQty : {
+        availableQty: productQty.availableQty,
+        totalQty:  productQty.totalQty,
+      },
+      sallerId,
+      categoryId,
+      subCategoryId,
+      brandId,
+      avilablityStatus,
       status: CommonStatus.WAIT_FOR_APPROVAL,
     });
-    categoryObj.save((err, data) => {
+
+    productObj.save((err, data) => {
       if (err) {
         console.log("category ERROR", err);
         return res.status(400).json({ msg: "BED REQUEST", error: err });
       } else {
         console.log("category added data", data);
-        return res.status(201).json({ msg: "CATEGORY ADDED", data: data });
+        return res.status(201).json({ msg: "PRODUCT ADDED", data: data });
       }
     });
   } catch (err) {
@@ -26,18 +44,25 @@ const addProduct = (req, res) => {
   }
 };
 
-const getFilteredProducts = (req, res) => {
+const getAllProducts = (req, res) => {
   try {
-    let { catId } = req.params;
-    categoryModel.findByIdAndRemove(catId, (err, data) => {
-      if (err) {
-        console.log("category ERROR", err);
-        return res.status(400).json({ msg: "BED REQUEST", error: err });
-      } else {
-        console.log("category removed by id", data);
-        return res.status(200).json({ msg: "CATEGORY REMOVED", data: data });
-      }
-    });
+    
+    let page = req.query.pageNo - 1;
+    let limit = req.query.limit;
+    let skip = page * limit;
+   productModel
+      .find()
+      .limit(limit)
+      .skip(skip)
+      .exec((err, data) => {
+        if (err) {
+          return res.status(500).json({ msg: "FAILED", error: err });
+        }
+        res
+          .status(200)
+          .json({ msg: "total product ", total: data.length, data: data });
+      });
+  
   } catch (err) {
     console.log("error from catch block", error);
     return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: error });
@@ -167,7 +192,7 @@ const changeMultipleProductStatus = (req, res) => {
 
 module.exports = {
   addProduct,
-  getFilteredProducts,
+  getAllProducts,
   updateProduct,
   removeProductById,
   changeProductStatus,

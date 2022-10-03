@@ -8,8 +8,8 @@ let orderSchema = new mongoose.Schema({
             required : true
             },
         priceOfPerProduct : {type : Number , required : true},
-        qty : { type : Number , required : true },
-        total :  { type : Number , required : true}
+        qty : { type : Number , required : true , default : 0},
+        total :  { type : Number , default : priceOfPerProduct*qty }
     }],
     BilledAmmount :{
         type:Number,
@@ -42,8 +42,8 @@ let orderSchema = new mongoose.Schema({
     
 )
 
-let stateModel = mongoose.model("Order",orderSchema)
+let orderModel = mongoose.model("Order",orderSchema)
 
-module.exports = stateModel
+module.exports = orderModel
 
 //products : [{ product , price , qty }] , finalPrice , placed date : date , expected delivery date : date, paymentMethodUsed : payment method collection link , shippingAddress , placedByUser , orderStatus  : [{  date : date is current when we change status ,status : [ placed , cancled , refunded, delivered , atFactory , atOurStore , atDeliveryPartnerStore ] }], deliveryBoy : user collection , isCanceled : true / false

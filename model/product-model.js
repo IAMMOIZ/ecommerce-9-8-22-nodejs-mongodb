@@ -1,21 +1,23 @@
 const { ImageType, AvailablityStatus } = require("../enum/enum");
 const mongoose = require("mongoose");
-const ProductSchema = new mongoose.Schema(
+
+
+const productSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
-    description: { type: String, required: true },
-    enable_status: { type: String, required: true },
-    price: {
+    productName: { type: String, required: true },
+    productDescription: { type: String, required: true },
+    status: { type: String, required: true },
+    productPrice: {
       basePrice: { type: Number, required: true },
       salePrice: { type: Number, required: true },
       costPrice: { type: Number, required: true },
     },
     productCode: { type: String, required: true, unique: true }, //uuid
-    qty: {
+    productQty: {
       availableQty: { type: Number, required: true, min: 0 },
       totalQty: { type: Number, required: true, min: 0 },
     },
-    imagePath: [
+    imagePath: [  
       {
         path: { type: String },
         imageType: { type: String, enums: ImageType, default: ImageType.EXTRA },
@@ -37,4 +39,6 @@ const ProductSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-module.exports = mongoose.model("Products", ProductSchema);
+ let productModel = mongoose.model("Products", productSchema);
+
+ module.exports = productModel
