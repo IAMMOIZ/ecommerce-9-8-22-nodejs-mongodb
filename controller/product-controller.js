@@ -1,6 +1,7 @@
 //note completed controller logic is from category controller 
 
 const { CommonStatus } = require("../enum/enum");
+const brandModel = require("../model/brand-model");
 
 const productModel = require ('../model/product-model')
  
@@ -69,6 +70,28 @@ const getAllProducts = (req, res) => {
   }
 };
 
+const getProductById = (req, res) => {
+  try {
+    let productId = req.params.id;
+
+    productModel.findById(productId, (err, data) => {
+      if (err) {
+        console.log("product  ERROR", err);
+        return res.status(400).json({ msg: "Data Not Found", error: err });
+      } else {
+        // if (catId != catId) {
+        //   return res.status(202).send({ msg: "Data Not Exists" })
+        // }
+        console.log("product by id", data);
+        return res.status(200).json({ msg: "product  SHOW", data: data });
+      }
+    });
+  } catch (err) {
+    console.log("error from catch block", err);
+    return res.status(500).json({ msg: "SOMETHING WENT WRONG", error: err });
+  }
+};
+
 const updateProduct = (req, res) => {
   try {
     let { catId } = req.params;
@@ -94,13 +117,9 @@ const updateProduct = (req, res) => {
 
 const removeProductById = (req, res) => {
   try {
-    page = req.params.page || 0;
-    limit = req.params.limit || 10;
-    categoryModel
-      .find()
-      .skip(page * limit)
-      .limit(pageOptions.limit)
-      .exec(function (err, data) {
+    let id = req.params.id
+    productModel
+      .findByIdAndDelete(id ,(err, data)=> {
         if (err) {
           return res.status(500).json({ msg: "FAILED", error: err });
         }
@@ -114,14 +133,15 @@ const removeProductById = (req, res) => {
 
 const changeProductStatus = (req, res) => {
   try {
-    let { catId } = req.params;
-    categoryModel.findById(catId, (err, data) => {
+    let productId = req.params.id;
+    let status = req.query.status
+    productModel.findByIdAndUpdate(productId, status , (err, data) => {
       if (err) {
         console.log("category ERROR", err);
         return res.status(400).json({ msg: "BED REQUEST", error: err });
       } else {
-        console.log("category removed by id", data);
-        return res.status(200).json({ msg: "CATEGORY REMOVED", data: data });
+        
+        return res.status(200).json({ msg: "product status changed", data: data });
       }
     });
   } catch (err) {
@@ -132,10 +152,11 @@ const changeProductStatus = (req, res) => {
 
 const productCountWithFilter = (req, res) => {
   try {
-    let { catId, status } = req.params;
-    categoryModel.findByIdAndUpdate(catId, { status }, (err, data) => {
+    let productId = req.params.id;
+    let status = req.query.status
+    brandModel.findByIdAndUpdate(productId, status , (err, data) => {
       if (err) {
-        console.log("category ERROR", err);
+      
         return res.status(400).json({ msg: "BED REQUEST", error: err });
       } else {
         console.log("category STATUS UPDATE by id", data);
@@ -152,16 +173,17 @@ const productCountWithFilter = (req, res) => {
 
 const uploadProductImage = (req, res) => {
   try {
-    let { catId, status } = req.params;
-    categoryModel.findByIdAndUpdate(catId, { status }, (err, data) => {
+    let productId = req.params.id;
+    let status = req.query.status
+    brandModel.findByIdAndUpdate(productId, status, (err, data) => {
       if (err) {
         console.log("category ERROR", err);
         return res.status(400).json({ msg: "BED REQUEST", error: err });
       } else {
-        console.log("category STATUS UPDATE by id", data);
+        console.log("product image UPDATE by id", data);
         return res
           .status(200)
-          .json({ msg: "CATEGORY STATUS UPDATED", data: data });
+          .json({ msg: "product image UPDATED", data: data });
       }
     });
   } catch (err) {
@@ -172,16 +194,17 @@ const uploadProductImage = (req, res) => {
 
 const changeMultipleProductStatus = (req, res) => {
   try {
-    let { catId, status } = req.params;
-    categoryModel.findByIdAndUpdate(catId, { status }, (err, data) => {
+    let productId = req.params.id;
+    let status = req.query.status
+    brandModel.findByIdAndUpdate(productId, { status }, (err, data) => {
       if (err) {
         console.log("category ERROR", err);
         return res.status(400).json({ msg: "BED REQUEST", error: err });
       } else {
-        console.log("category STATUS UPDATE by id", data);
+        console.log("product STATUS UPDATE by id", data);
         return res
           .status(200)
-          .json({ msg: "CATEGORY STATUS UPDATED", data: data });
+          .json({ msg: "product STATUS UPDATED", data: data });
       }
     });
   } catch (err) {
@@ -193,6 +216,7 @@ const changeMultipleProductStatus = (req, res) => {
 module.exports = {
   addProduct,
   getAllProducts,
+  getProductById,
   updateProduct,
   removeProductById,
   changeProductStatus,
