@@ -21,7 +21,7 @@ getAllCountryByPagination = (req,res)=>{
     let skip = page*limit
     countryModel.find().limit(limit).skip(skip).then(
         (data)=>{
-            return res.status(200).json({result : data ,msg : "all country"})
+            return res.status(200).json({total : data.length ,result : data ,msg : "all country"})
         }
     ).catch((err)=>{
         return res.status(400).json({error : err , msg : "data not found"})

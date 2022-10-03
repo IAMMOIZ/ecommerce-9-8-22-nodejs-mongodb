@@ -17,7 +17,7 @@ const productSchema = new mongoose.Schema(
       availableQty: { type: Number, required: true, min: 0 },
       totalQty: { type: Number, required: true, min: 0 },
     },
-    imagePath: [
+    imagePath: [  
       {
         path: { type: String },
         imageType: { type: String, enums: ImageType, default: ImageType.EXTRA },

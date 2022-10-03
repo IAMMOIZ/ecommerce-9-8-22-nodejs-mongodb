@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "50efdf6d-6f03-4c86-bdb4-545bd47cf7f1",
+		"_postman_id": "0fb1f913-d6fd-4f01-b890-a0653542b79d",
 		"name": "MERN-MEAN",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20469829"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -254,7 +253,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"catName\" : \"electronics\" ,\r\n    \"catCode\" : 2005\r\n}",
+							"raw": "{\r\n    \"catName\" : \"health\" ,\r\n    \"catCode\" : 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -461,7 +460,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"catId\" : \"63358d19a799d40fb480ffaa\" , \r\n    \"subCatName\" : \"TV\",\r\n    \"subCatNumber\" : 202\r\n}",
+							"raw": "{\r\n    \"catId\" : \"633abde267163c25db5f007c\" , \r\n    \"subCatName\" : \"TV\",\r\n    \"subCatNumber\" : 202\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -623,7 +622,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"catId\" : \"63358d07a799d40fb480ffa8\",\r\n    \"subCatId\" : \"633595054faa6020e0634438\",\r\n    \"brandName\" : \"mi\",\r\n    \"brandNumber\" : 16\r\n\r\n}",
+							"raw": "{\r\n    \"catId\" : \"633abde267163c25db5f007c\",\r\n    \"subCatId\" : \"633acc0c67163c25db5f0091\",\r\n    \"brandName\" : \"mi\",\r\n    \"brandNumber\" : 16\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -778,10 +777,6 @@
 		},
 		{
 			"name": "payment-method apis",
-			"item": []
-		},
-		{
-			"name": "product apis",
 			"item": []
 		},
 		{
@@ -980,7 +975,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"countryName\" : \"Pakistan\",\r\n    \"countryCode\" : 901\r\n\r\n}",
+							"raw": "{\r\n    \"countryName\" : \"indauia\",\r\n    \"countryCode\" : 92\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1000,6 +995,91 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get all country",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/country/get-country-list",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"country",
+								"get-country-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get country by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/country/get-country-byId/633aa97ad2fdd11651be8b50",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"country",
+								"get-country-byId",
+								"633aa97ad2fdd11651be8b50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update country status by id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/country/country-status/633aa97ad2fdd11651be8b50?status=blocked",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"country",
+								"country-status",
+								"633aa97ad2fdd11651be8b50"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "blocked"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete counry by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/country/delete-country-byId/633aa97ad2fdd11651be8b50",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"country",
+								"delete-country-byId",
+								"633aa97ad2fdd11651be8b50"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1013,12 +1093,109 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"productName\" : \"abc\",\r\n      \"productDescription\": \"health product\",\r\n      \"productPrice\" : {\r\n        \"basePrice\": 8989,\r\n        \"salePrice\": 7999,\r\n        \"costPrice\": 6983\r\n      },\r\n      \"productCode\" : 56789,\r\n      \"productQty\" : {\r\n        \"availableQty\": 89,\r\n        \"totalQty\": 99\r\n      },\r\n      \"sallerId\" : \"\",\r\n      \"categoryId\" : \"\",\r\n      \"subCategoryId\" : \"\",\r\n      \"brandId\": \"\",\r\n      \"avilablityStatus\" : \"\",\r\n      \"status\": \"WAIT_FOR_APPROVAL\"\r\n}",
+							"raw": "{\r\n    \"productName\" : \"uysga\",\r\n      \"productDescription\": \"game product\",\r\n      \"productPrice\" : {\r\n        \"basePrice\": 8989,\r\n        \"salePrice\": 7999,\r\n        \"costPrice\": 6983\r\n      },\r\n      \"productCode\" : 56732789,\r\n      \"productQty\" : {\r\n        \"availableQty\": 89,\r\n        \"totalQty\": 99\r\n      },\r\n      \"sallerId\" : \"633abef667163c25db5f008a\",\r\n      \"categoryId\" : \"633abde267163c25db5f007c\",\r\n      \"subCategoryId\" : \"633acc0c67163c25db5f0091\",\r\n      \"brandId\": \"633acc3967163c25db5f0093\",\r\n      \"avilablityStatus\" : \"available\",\r\n      \"status\": \"WAIT_FOR_APPROVAL\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
+						},
+						"url": {
+							"raw": "localhost:3000/product/register-product",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"register-product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all product list with paggination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/product/get-product-list",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"get-product-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get product by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/product//product-detail/633accb067163c25db5f009b",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"",
+								"product-detail",
+								"633accb067163c25db5f009b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change product status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/product/product-status/633accb067163c25db5f009b?status=available",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"product-status",
+								"633accb067163c25db5f009b"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "available"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete product by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/product/remove-product/633acc8867163c25db5f0095",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"remove-product",
+								"633acc8867163c25db5f0095"
+							]
 						}
 					},
 					"response": []

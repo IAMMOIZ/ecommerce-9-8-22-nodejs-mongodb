@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const {
   addProduct,
-  getFilteredProducts,
-  updateProduct,
+  getAllProducts,
+  getProductById,
+  updateProduct, 
   removeProductById,
   changeProductStatus,
   productCountWithFilter,
@@ -11,13 +12,13 @@ const {
   changeMultipleProductStatus,
 } = require("../controller/product-controller");
 
-router.post("/add-product", addProduct);
+router.post("/register-product", addProduct);
 //price range filter , catgorywise , brand , subcategory ,
-router.post("/get-product-filter", getFilteredProducts);
+router.get("/get-product-list", getAllProducts);
 router.patch("/update-product/:id", updateProduct);
 router.delete("/remove-product/:id", removeProductById);
-// router.get("/product-detail/:id",  getProductById )
-router.patch("/product-status/:id/:status", changeProductStatus);
+router.get("/product-detail/:id",  getProductById )
+router.patch("/product-status/:id", changeProductStatus);
 ///product count :catid/:subcatid/:brandid/:bysaller
 router.get("/product-count", productCountWithFilter);
 //change and upload image for products
